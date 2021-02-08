@@ -4,3 +4,6 @@
 
 ## Investigation of Non-normality in a Simple Errors-in-variables Model
 
+Lee Chun Yin (3035469140)
+
+Project supervisor: Dr. Raymond W.L. WONG
