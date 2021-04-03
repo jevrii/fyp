@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[margin=0.5in]{geometry}
+
+\setlength{\parskip}{1em}
+
+\title{Investigation of Non-normality in a Simple Errors-in-variables Model}
+\author{Lee Chun Yin 3035469140}
+\date{April 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+
+\section{Introduction}
+
+Consider the problem of regression through the origin with only one explanatory variable:
+
+$$
+y = \beta x + \epsilon
+$$
+
+In real life applications, usually we will obtain pairs of observations $(\tilde{x}_i, \tilde{y}_i)$, then apply a model by performing linear regression on the data. However, we only have observations on the observed $\tilde{x} = x + u$ and $\tilde{y} = y + v$, which have some additive error compared to the true $x$ and $y$ that thse model assumptions are based on. This gives rise to the \textit{errors-in-variables model}. This imposes a different problem from the classical linear regression model, because the classical model assumes that we have access to the true value of explanatory variable $x$ without any error. 
+
+Furthermore, in the classical linear regression model, we often assume that the observed dependent variable $y$ is subject to some $\epsilon$ following normal distribution with mean $0$ and same variance throughout all observations. However, the normality assumption often does not hold for real life datasets. For example, when dealing with datasets with heavy-tailed errors, one of the practices is to assume $t$-distributed errors instead of normal-distributed errors. As due to the light-tailedness of the normal distribution, assuming normal errors essentially implies that we assume that large errors occur with very low probability, which may not be true in datasets of poorer quality and have heavy-tailed errors.
+
+In this project, we investigate how the non-normality of errors in both the explanatory variable $x$ and the noise $\epsilon$ affects the estimation of the regression coefficient $\hat{beta}$ and the estimation of variance of error $\sigma^2_\epsilon$. We first perform a literature review on existing results on the \textit{errors-in-variables model}. Then we will describe in detail the computer simulation technique to produce results. Finally, we will present the results and findings from
+the computer simulations. The code used in this project can be found the appendix, and is also available on github online at \url{https://github.com/jevrii/fyp}.
+
+\section{Literature review}
+
+\section{Methadology}
+
+\section{Results and discussions}
+
+\section{Appendix}
+
+\end{document}
