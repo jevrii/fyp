@@ -22,7 +22,8 @@ Consider the problem of regression through the origin with only one explanatory 
 y = \beta x + \epsilon
 \]
 
-In real life applications, usually we will obtain pairs of observations $(\tilde{x}_i, \tilde{y}_i)$, then apply a model by performing linear regression on the data. However, we only have observations on the observed $\tilde{x} = x + u$ and $\tilde{y} = y + v$, which have some additive error compared to the true $x$ and $y$ that thse model assumptions are based on. This gives rise to the \textit{errors-in-variables model}. This imposes a different problem from the classical linear regression model, because the classical model assumes that we have access to the true value of explanatory variable $x$ without any error. 
+In real life applications, usually we will obtain pairs of observations $(\tilde{x}_i, \tilde{y}_i)$, then apply a model by performing linear regression on the data. However, we only have observations on the observed $\tilde{x}_i = x_i + u_i$ and $\tilde{y}_i = y_i + v_i$, which have some additive error compared to the true $x$ and $y$ that thse model assumptions are based on. We further assume that the measurement errors $u_i$ and $v_i$ have mean zero and constant variances, and that the
+measurement error is uncorrelated and independent to the true values $x$ and $y$. This gives rise to the \textit{errors-in-variables model}. This imposes a different problem from the classical linear regression model, because the classical model assumes that the observed $\tilde{x}$ is nonrandom, that we have access to the true value of explanatory variable $x$ without any error. 
 
 Furthermore, in the classical linear regression model, we often assume that the observed dependent variable $y$ is subject to some $\epsilon$ following $N(0, \sigma^2)$. However, the normality assumption often does not hold for real life datasets. For example, when dealing with datasets with heavy-tailed errors, one of the practices is to assume $t$-distributed errors instead of normal-distributed errors. As due to the light-tailedness of the normal distribution, assuming normal errors
 essentially implies that we assume that large errors occur with very low probability, which may not be true in datasets of poorer quality and have heavy-tailed errors. Thus, there is a need to investiage the impacts of non-normality on the \textit{errors-in-variables model}.
@@ -31,6 +32,48 @@ In this project, we investigate how the non-normality of errors in both the expl
 the computer simulations. The code used in this project can be found in the appendix, and is also available on github online at \url{https://github.com/jevrii/fyp}.
 
 \section{Literature review}
+
+We mainly refer to the lecture notes written by Pischke \cite{lecturenotes} for the errors-in-variables model. 
+
+Suppose we wish to estimate the relationship $y = \beta x + \epsilon$, but we only have data on $\tilde{x} = x + u$. Also, let's further asume that $\sigma_v^2 = 0$, i.e. there is only measurement error in $x$.
+
+If we substitute $\tilde{x} = x+u$ into $y = \beta x + \epsilon$, we obtain:
+
+\[
+    y_i = \beta(\tilde{x}_i - u_i) + \epsilon_i = \beta \tilde{x} + (\epsilon - \beta u)
+\]
+
+\subsection{Ordinary least-squares estimators for $\beta$ and $\sigma_\epsilon^2$}
+
+Suppose we use the ordinary least-squares (OLS) estimator for $\beta$:
+
+\[
+\hat{\beta} = \frac{cov(\tilde{x, y})}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}
+\]
+
+Because $\epsilon$, $u$ and $x$ are independent to each other, we can obtain
+
+\[
+\textrm{plim } \hat{\beta} = \frac{\beta \sigma^2_x}{\sigma^2_x + \sigma^2_u} = \lambda \beta
+\]
+
+where
+
+\[
+\lambda \equiv \frac{\sigma_x^2}{\sigma_x^2 + \sigma_u^2}
+\]
+
+This $\lambda$ is also called the reliability or signal-to-variance ratio.
+
+Therefore, we can see that the OLS estimator $\hat{\beta}$ is biased towards zero because $0 < \lambda < 1$. The sign of the bias depends on the sign of the true $\beta$.
+
+\subsection{Method-of-moments estimators for $\beta$ and $\sigma_\epsilon^2$}
+
+In order to obtain an unbiased estimate for $\beta$, we can use the method-of-moments (MME) estimator instead. Suppose we have the obtained the value of $\sigma_x^2$, $\sigma_u^2$ or $\lambda$, then we can apply the appropiate adjustment for the bias in the OLS $\hat{\beta}$ as $\sigma^2_{\tilde{x}} = \sigma^2_x + \sigma^2_u$. Indeed, in some cases we can obtain the value of $\sigma_u^2$ via repeated measurements.
+
+For example, if $\sigma_u^2$ is known, then we can obtain the unbiased estimator $\hat{\beta}_{MME} = \frac{\sigma^2_{\tilde{x}}}{\sigma^2_{\tilde{x}} - \sigma^2_u}$.
+
+
 
 \section{Methadology}
 
