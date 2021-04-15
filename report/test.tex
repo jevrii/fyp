@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage[ruled,vlined]{algorithm2e}
 \setlength{\parskip}{1em}
-
+\renewcommand{\algorithmcfname}{Procedure}
 \title{Investigation of Non-normality in a Simple Errors-in-variables Model}
 \author{Lee Chun Yin 3035469140}
 \date{April 2021}
@@ -124,22 +124,25 @@ The computer simulation method was employed in order to investigate the impacts 
 
 \begin{algorithm}[H]
     \SetAlgoLined
-    \KwResult{Write here the result }
-     initialization\;
-      \While{While condition}{
-            instructions\;
-              \eIf{condition}{
-                     instructions1\;
-                        instructions2\;
-                           
-                    }{
-                           instructions3\;
-                             
-                    }
-                     
-      }
-       \caption{How to write algorithms}
+    Initialize $\beta_{truth}$, $n$, $x_{lo}$, $x{hi}$\;
+    \ForAll{$\sigma^2_u \in \{0, 1.5, 2, 2.5, 3.0, 4.5, 6.0, 8.0, 10.0\}$}{
+        \ForAll{$\sigma^2_\epsilon \in \{1.5, 2, 2.5\}$}{
+            Initialize $MSE_{\hat{\beta}_{OLS}}=0$, $MSE_{\hat{\beta}_{MME}}=0$, $MBE_{\hat{\beta}_{OLS}}=0$, $MBE_{\hat{\beta}_{MMiE}}=0$.\;
+            Initialize $MSE_{{\hat{\sigma^2_\epsilon}}_{OLS}}=0$, $MSE_{{\hat{\sigma^2_\epsilon}}_{MME}}=0$, $MBE_{\hat{\sigma^2_\epsilon}_{OLS}}=0$, $MBE_{\hat{\sigma^2_\epsilon}_{MME}}=0$\;
+
+            \For{10000 iterations}{
+                Draw independetly $n$ instances of explanatory variable $x_i$ from $U(x_{lo}, x_{hi})$\;
+                Compute $n$ observations of $y_i = \beta_{truth} \cdot x_i + \epsilon_i$, where $\epsilon_i$ is drawn independently from a distribution with variance $\sigma^2_\epsilon$\;
+                Compute $n$ instances of observed explanatory variable $\tilde{x}_i = x_i + u_i$, where observation $u_i$ is drawn independently from a distribution with variance $\sigma^2_u$\;
+                Calculate $\hat{\beta}_{OLS}$, $\hat{\beta}_{MME}$, $\hat{\sigma^2_\epsilon}_{OLS}$, $\hat{\sigma^2_\epsilon}_{MSE}$ from the observations $\tilde{x}$, $y$, and prior information on observation error $\sigma^2_u$\;
+                Update $MSE_{\hat{\beta}_{OLS}}$, $MSE_{\hat{\beta}_{MME}}$, $MBE_{\hat{\beta}_{OLS}}$, $MBE_{\hat{\beta}_{MME}}$, $MSE_{{\hat{\sigma^2_\epsilon}}_{OLS}}$, $MSE_{{\hat{\sigma^2_\epsilon}}_{MME}}$, $MBE_{\hat{\sigma^2_\epsilon}_{OLS}}$, $MBE_{\hat{\sigma^2_\epsilon}_{MME}}$\;
+            }
+        }
+    }
+   \caption{Computer simulation procedure}
 \end{algorithm}
+
+The codes were implemented in Python in a Jupyter notebook, and the source code can be found in the appendix.
 
 \section{Results and discussions}
 
