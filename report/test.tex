@@ -179,10 +179,12 @@ The computer simulation procedures are summarized in procedure \ref{alg:Algo}.
 
 In order to investigate the impacts on non-normality on the estimators, there is a need to use non-normal distributions to sample the observation error $u$ and residual error $\epsilon$.
 In order to satisfy the assumptions of the errors-in-variables model, the distributions used to generate the error terms should have mean zero.
-In our experiment procedures, we also have to derive the model parameters from a fixed $\sigma_u^2$ and $\sigma_\epsilon^2$. Thus, in order to ease calculation, the distribution chosen should have finite variance and the variance is in a closed form such that the derivation of model parameters from a fixed variance is easy to compute.
+In our experiment procedures, we also have to derive the model parameters from a fixed $\sigma_u^2$ and $\sigma_\epsilon^2$.
+Thus, in order to ease calculation, the distribution chosen should have finite variance and the variance is in a closed form such that the derivation of model parameters from a fixed variance is easy to compute.
 
 Taking the above factors into consideration, we decided to use the following distributions: The normal/Gaussian distribution, the Student's $t$ distribution, and the $\chi^2$ distribution re-centered at mean $0$.
-They are chosen because they have different shapes from the normal distribution - the Student's $t$ distribution is known to have heavier tails than the normal distribution, and the $\chi^2$ distribution is known to be skewed. They pose substantial differences from the normal distribution which has light tails and is symmetric at $0$.
+They are chosen because they demonstrate features not seen in the normal distribution - the Student's $t$ distribution is known to have heavier tails than the normal distribution, and the $\chi^2$ distribution is known to be skewed.
+They pose substantial differences from the normal distribution which has light tails and is symmetric at $0$.
 
 We will then perform the simulations using these distributions as the underlying sampling distributions of the observation error $u$ and residual error $\epsilon$, as described in the previous subsection.
 
