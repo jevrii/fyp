@@ -149,14 +149,14 @@ After generating the observation data, we perform estimations based on the obser
 
 After computing the estimators, we compute the bias and squared error of each of these estimators when compared to the ground truth $\beta_{truth}$ and $\sigma^2_\epsilon$. 
 
-For the same observation error distribution and residual error distribution, we perform the whole observation data generation and estimation procedures for $10000$ iterations.
+For the same observation error distribution and residual error distribution, we perform the whole observation data generation and estimation procedures for multiple iterations.
 This is to obtain more reliable conclusions on the mean bias (MBE) and mean squared error (MSE) of the estimators.
 
 \begin{algorithm}[H]
     \SetAlgoLined
     Initialize $\beta_{truth}$, $n$, $x_{lo}$, $x_{hi}$\;
-    \ForAll{$\sigma^2_u \in \{0, 1.5, 2, 2.5, 3.0, 4.5, 6.0, 8.0, 10.0\}$}{
-        \ForAll{$\sigma^2_\epsilon \in \{1.5, 2, 2.5\}$}{
+    \ForAll{$\sigma^2_u \in \{\textrm{list of observation variance}\}$}{
+        \ForAll{$\sigma^2_\epsilon \in \{\textrm{list of residual variance}\}$}{
             Initialize $MSE_{\hat{\beta}_{OLS}}=0$, $MSE_{\hat{\beta}_{MME}}=0$, $MBE_{\hat{\beta}_{OLS}}=0$, $MBE_{\hat{\beta}_{MME}}=0$.\;
             Initialize $MSE_{{\hat{\sigma^2_\epsilon}}_{OLS}}=0$, $MSE_{{\hat{\sigma^2_\epsilon}}_{MME}}=0$, $MBE_{\hat{\sigma^2_\epsilon}_{OLS}}=0$, $MBE_{\hat{\sigma^2_\epsilon}_{MME}}=0$\;
 
@@ -188,7 +188,10 @@ We will then perform the simulations using these distributions as the underlying
 
 \subsection{Experiment parameters used}
 
+To produce the results in the subsequent section, we used the following parameters: $n=30$, $\beta_{truth}=2$, $x_{hi} = -20$, $x_{lo} = 20$.
+For the simulation procedures, we used $\sigma^2_u \in {0, 1.5, 2, 2.5, 3.0, 4.5, 6.0, 8.0, 10.0}$, and $\sigma_\epsilon^2 \in {1.5, 2, 2.5}$. We are unable to experiment with variances from $(0, 1]$ because the variance of the Student's $t$ distribution is only defined when $sigma^2 > 1$.
 
+For each combination of observation error distribution and residual error distribution, we performed $10,000$ iterations to produce the MBE and MSE results.
 
 \subsection{Implementation details}
 
