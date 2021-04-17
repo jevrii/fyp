@@ -188,8 +188,9 @@ We will then perform the simulations using these distributions as the underlying
 
 \subsection{Experiment parameters used}
 
-To produce the results in the subsequent section, we used the following parameters: $n=30$, $\beta_{truth}=2$, $x_{hi} = -20$, $x_{lo} = 20$.
-For the simulation procedures, we used $\sigma^2_u \in {0, 1.5, 2, 2.5, 3.0, 4.5, 6.0, 8.0, 10.0}$, and $\sigma_\epsilon^2 \in {1.5, 2, 2.5}$. We are unable to experiment with variances from $(0, 1]$ because the variance of the Student's $t$ distribution is only defined when $sigma^2 > 1$.
+To produce the results in the subsequent section, we used the following parameters: $n=30$, $\beta_{truth}=2$, $x_{lo} = -20$, $x_{hi} = 20$.
+For the simulation procedures, we used $\sigma^2_u \in {0, 1.5, 2, 2.5, 3.0, 4.5, 6.0, 8.0, 10.0}$, and $\sigma_\epsilon^2 \in {1.5, 2, 2.5}$.
+We are unable to experiment with variances from $(0, 1]$ because the variance of the Student's $t$ distribution is only defined when $\sigma^2 > 1$.
 
 For each combination of observation error distribution and residual error distribution, we performed $10,000$ iterations to produce the MBE and MSE results.
 
@@ -198,6 +199,48 @@ For each combination of observation error distribution and residual error distri
 The codes were implemented in Python in a Jupyter notebook. We used the sampling distribution implementations provided in the \verb|numpy.random| package. The detailed implementation and source code can be found in the appendix.
 
 \section{Results and discussions}
+
+We split this section into several subsections.
+
+First, we describe the results for the estimation of $\beta$.
+We consider both the MBE and MSE for the OLS and MME estimators of $\beta$. 
+We compare the simulation outcomes for different distributions of residual error for when there is absence of observation error (i.e. $\sigma^2_u = 0$).
+For the cases under the presence of observation error (i.e. $\sigma^2_u > 0$), we compare the MBE and MSE for different distributions (Normal, Student's $t$, $\chi^2$) while maintaining the same variance.
+
+Afterwards, we similarly describe the results for the estimation of $\sigma^2_\epsilon$.
+We consider both the MBE and MSE for the OLS and MME estimators of $\sigma^2$.
+We similarly compare the simulation outcomes under the cases of absence of observation error, and cases under the presence of observation error of different distributions respectively.
+
+\subsection{Estimation of $\beta$}
+
+We use the following estimators of $\beta$ and apply them to the generated observation data $(x_i, y_i)$:
+
+\begin{equation}
+    \begin{split}
+        \hat{\beta}_{OLS} &= \frac{cov(\tilde{x, y})}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}\\
+        \hat{\beta}_{MME} &= \cdots\\
+    \end{split}
+\end{equation}
+
+\subsubsection{Absence of observation error}
+
+\subsubsection{Normal-distributed observation error}
+
+\subsubsection{Student's $t$-distributed observation error}
+
+\subsubsection{$\chi^2$-distributed observation error}
+
+\subsection{Estimation of $\sigma^2_\epsilon$}
+
+\subsubsection{Absence of observation error}
+
+\subsubsection{Normal-distributed observation error}
+
+\subsubsection{Student's $t$-distributed observation error}
+
+\subsubsection{$\chi^2$-distributed observation error}
+
+\section{Conclusion}
 
 \section{Acknowledgments}
 
@@ -218,3 +261,8 @@ The codes were implemented in Python in a Jupyter notebook. We used the sampling
 \end{thebibliography}
 
 \end{document}
+
+
+
+
+
