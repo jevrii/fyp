@@ -224,6 +224,46 @@ We use the following estimators of $\beta$ and apply them to the generated obser
 
 \subsubsection{Absence of observation error}
 
+Under the absence of observation error, the OLS and MME estimators of $\beta$ are the same.
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MBE of $\beta$ when $\sigma^2_u=0$, under different distributions and variance of $\epsilon$.}
+    \label{Tab:MBE_absence}
+    \begin{tabular}[t]{lccc}
+        \hline
+        &Normal&Student's $t$&$\chi^2$\\
+        \hline
+        $\sigma^2_\epsilon = 1.5$&-0.000260& 0.000252& 0.000052\\
+        $\sigma^2_\epsilon = 2.0$& 0.000151& 0.000114&-0.000356\\
+        $\sigma^2_\epsilon = 2.5$&-0.000176&-0.000105& 0.000112\\
+        \hline
+    \end{tabular}
+\end{table}
+
+Table \ref{Tab:MBE_absence} summarizes the MBE of $\beta$ when $\sigma^2_u=0$ for different error distributions.
+There is no clear trend of increasing/decreasing pattern of the MBE for each of the distributions. 
+This is mostly because the bias is centered at zero, leading to the signs of bias to be different between simulation trials, which cancel out each other in the calculation of MBE. 
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MSE of $\beta$ when $\sigma^2_u=0$, under different distributions and variance of $\epsilon$.}
+    \label{Tab:MSE_absence}
+    \begin{tabular}[t]{lccc}
+        \hline
+        &Normal&Student's $t$&$\chi^2$\\
+        \hline
+        $\sigma^2_\epsilon = 1.5$&0.000352&0.000351&0.000343\\
+        $\sigma^2_\epsilon = 2.0$&0.000470&0.000478&0.000458\\
+        $\sigma^2_\epsilon = 2.5$&0.000588&0.000594&0.000573\\
+        \hline
+    \end{tabular}
+\end{table}
+
+Table \ref{Tab:MSE_absence} summarizes the MSE of $\beta$ when $\sigma^2_u=0$ for different error distributions.
+There is a clear trend of increasing of the MSE for each of the distributions as $\sigma^2_\epsilon$ increases. 
+Furthermore, we can observe that the MSE for $\chi^2$ distribution is the least in all 3 experiments, and the MSE for Student's $t$ distribution is the greatest in 2 out of 3 experiments.
+
 \subsubsection{Normal-distributed observation error}
 
 \subsubsection{Student's $t$-distributed observation error}
