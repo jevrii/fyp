@@ -266,48 +266,72 @@ Table \ref{Tab:MSE_absence} summarizes the MSE of $\beta$ when $\sigma^2_u=0$ fo
 There is a clear trend of increasing of the MSE for each of the distributions as $\sigma^2_\epsilon$ increases. 
 Furthermore, we can observe that the MSE for $\chi^2$ distribution is the least in all 3 experiments, and the MSE for Student's $t$ distribution is the greatest in 2 out of 3 experiments.
 
-\subsubsection{Normal-distributed observation error and residual error}
+\subsubsection{Normal-distributed observation error and normal-distributed residual error}
 
 Under the presence of observation error, the OLS and MME estimators of $\beta$ are different.
 We would expect the MME estimator to have lower absolute bias and lower MSE because under the presence of observation error, the OLS estimator is inconsistent but the MME estimator is consistent.
 
+Table \ref{Tab:MBE_normal} and Table \ref{Tab:MSE_normal} summarize the simulated MBE and MSE of the estimation of $\beta$ respectively.
+
 \begin{table}[ht]
     \centering
     \caption{Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$, and under normal-distributed residual error with different variances $\sigma^2_\epsilon$.}
-    \label{Tab:MBE_absence}
+    \label{Tab:MBE_normal}
     \begin{tabular}[t]{lcccccc}
         \hline
         &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
         \hline
         &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
         \hline
-        $\sigma^2_u = 1.5$&-0.018436& 0.001772&-0.018079&0.002132&-0.018945&0.001252\\
-        $\sigma^2_u = 2.0$&-0.024661& 0.002224&-0.026079&0.000746&-0.024411&0.002478\\
-        $\sigma^2_u = 2.5$&-0.030543& 0.002986&-0.030975&0.002519&-0.031361&0.002139\\
+        %$\sigma^2_u = 0.0$&-0.000003&-0.000003&0.000248&0.000248&-0.000139&-0.000139\\
+        $\sigma^2_u = 1.5$&-0.019467&0.000711&-0.018743&0.001453&-0.018929&0.001258\\
+        $\sigma^2_u = 2.0$&-0.025206&0.001655&-0.023977&0.002920&-0.025265&0.001602\\
+        $\sigma^2_u = 2.5$&-0.030908&0.002607&-0.030422&0.003106&-0.030886&0.002635\\
+        $\sigma^2_u = 3.0$&-0.036965&0.003140&-0.036627&0.003527&-0.036902&0.003217\\
+        $\sigma^2_u = 4.5$&-0.055003&0.004770&-0.056174&0.003501&-0.056439&0.003171\\
+        $\sigma^2_u = 6.0$&-0.072019&0.007202&-0.071406&0.007854&-0.073418&0.005616\\
+        $\sigma^2_u = 8.0$&-0.096652&0.007750&-0.096022&0.008548&-0.096813&0.007639\\
+        $\sigma^2_u = 10.0$&-0.119142&0.010226&-0.121257&0.007779&-0.117934&0.011878\\
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$, and under normal-distributed residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_normal}
+    \begin{tabular}[t]{lcccccc}
         \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&0.002049&0.001761&0.002120&0.001862&0.002254&0.001992\\
+        $\sigma^2_u = 2.0$&0.002801&0.002331&0.002747&0.002338&0.003020&0.002552\\
+        $\sigma^2_u = 2.5$&0.003447&0.002739&0.003563&0.002895&0.003810&0.003124\\
+        $\sigma^2_u = 3.0$&0.004320&0.003313&0.004423&0.003452&0.004584&0.003595\\
+        $\sigma^2_u = 4.5$&0.007218&0.004996&0.007379&0.005007&0.007404&0.004989\\
+        $\sigma^2_u = 6.0$&0.010421&0.006639&0.010245&0.006529&0.010711&0.006687\\
+        $\sigma^2_u = 8.0$&0.015781&0.008820&0.015708&0.008875&0.016050&0.009091\\
+        $\sigma^2_u = 10.0$&0.022013&0.011578&0.022421&0.011359&0.021891&0.011826\\
     \end{tabular}
 \end{table}
 
 We first focus on the observations of the MBE and MSE of $\hat{\beta}_{OLS}$.
 
 Firstly, we observe that the MBE of $\hat{\beta}_{OLS}$ is negative.
-This is result is expected because $\textrm{plim } \hat{\beta}_{OLS} = \frac{\beta \sigma^2_x}{\sigma^2_x + \sigma^2_u} = \lambda \beta_{truth}$ and is biased towards zero.
+This is result is expected because $\textrm{plim } \hat{\beta}_{OLS} = \frac{\beta \sigma^2_x}{\sigma^2_x + \sigma^2_u} = \lambda \cdot \beta_{truth}$ and is biased towards zero.
 In this simulation, $\beta_{truth} = 2 > 0$.
 Thus, the bias of $\hat{\beta}_{OLS}$ is expected to be negative, which is consistent with the simulation findings.
-
 Second, we observe that the MBE of $\hat{\beta}_{OLS}$ decreases as $\sigma^2_u$ increases.
 This is also consistent with the literature as $\lambda \equiv \frac{\sigma_x^2}{\sigma_x^2 + \sigma_u^2}$.
-When $\sigma^2_u$ increases, $\lambda$ decreases, and the bias $(\lambda-1)\beta_{truth}$ decreases.
-
+When $\sigma^2_u$ increases, $\lambda$ decreases, and the bias $(\lambda-1) \cdot \beta_{truth}$ decreases.
 Third, we observe that the MSE of $\hat{\beta}_{OLS}$ increases as $\sigma^2_u$ increases. Intuitively, this means that the error of the estimation of $\beta$ increases as the observation data is dirtier. 
 
 Now, we turn our attention to the observations of the MBE and MSE of $\hat{\beta}_{MME}$, and compare them with $\hat{\beta}_{OLS}$.
 
 Firstly, we observe that the absolute value of MBE and MSE of $\hat{\beta}_{MME}$ are both lower than that of $\hat{\beta_{OLS}}$ at the same $\sigma^2_u$ and $\sigma^2_\epsilon$.
 This is expected because $\hat{\beta}_{MME}$ is a consistent estimator of $\beta$ while $\hat{\beta}_{OLS}$ is not.
-
 Second, we observe that the MBE of $\hat{\beta}_{MME}$ (roughly) increases as $\sigma^2_u$ increases.
-
 Third, we observe that the MSE of $\hat{\beta}_{MME}$ increases as $\sigma^2_u$ increases. This is similar to the case of $\hat{\beta}_{OLS}$.
 
 \subsubsection{Student's $t$-distributed observation error}
@@ -325,6 +349,8 @@ Third, we observe that the MSE of $\hat{\beta}_{MME}$ increases as $\sigma^2_u$ 
 \subsubsection{$\chi^2$-distributed observation error}
 
 \section{Conclusion}
+
+\subsection{Further work}
 
 \section{Acknowledgments}
 
