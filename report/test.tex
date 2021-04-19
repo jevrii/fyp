@@ -271,7 +271,7 @@ Furthermore, we can observe that the MSE for $\chi^2$ distribution is the least 
 Under the presence of observation error, the OLS and MME estimators of $\beta$ are different.
 We would expect the MME estimator to have lower absolute bias and lower MSE because under the presence of observation error, the OLS estimator is inconsistent but the MME estimator is consistent.
 
-Table \ref{Tab:MBE_normal} and Table \ref{Tab:MSE_normal} summarize the simulated MBE and MSE of the estimation of $\beta$ respectively.
+Table \ref{Tab:MBE_normal} and Table \ref{Tab:MSE_normal} summarize the simulated MBE and MSE of the estimation of $\beta$ respectively, under normal-distributed errors.
 
 \begin{table}[ht]
     \centering
@@ -334,7 +334,57 @@ This is expected because $\hat{\beta}_{MME}$ is a consistent estimator of $\beta
 Second, we observe that the MBE of $\hat{\beta}_{MME}$ (roughly) increases as $\sigma^2_u$ increases.
 Third, we observe that the MSE of $\hat{\beta}_{MME}$ increases as $\sigma^2_u$ increases. This is similar to the case of $\hat{\beta}_{OLS}$.
 
-\subsubsection{Student's $t$-distributed observation error}
+\subsubsection{Student's $t$-distributed observation error and Student's $t$-distributed residual error}
+
+We perform the similar simulations for Student's $t$ distributed observation error and residual error for different variances.
+Elementary statistical theory tells us that the variance for a Student's $t$ distribution with $\nu > 0$ degrees of freedom has variance equal to $\frac{\nu}{\nu-2}$.
+Taking inverse of the equation $\sigma^2 = \frac{\nu}{\nu-2}$ gives $\nu = 2 \cdot \frac{\sigma^2}{\sigma^2-1}$.
+Note that the range of $\sigma^2_u$ and $\sigma^2_\epsilon$ are specially chosen such that $\nu > 2$ because the Student's $t$ distribution only has finite variance when $\nu > 2$.
+Thus, in the tables shown below, when we write $\sigma^2 = \delta$, it means the simulation trial was performed using the Student's $t$ distribution with $2 \cdot \frac{\delta}{\delta-1}$
+
+Table \ref{Tab:MBE_t} and Table \ref{Tab:MSE_t} summarize the simulated MBE and MSE of the estimation of $\beta$ respectively, under Student's $t$-distributed errors.
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under Student's $t$-distributed observation error with different variances $\sigma^2_u$, and under Student's $t$-distributed residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MBE_t}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&-0.018770&0.001429&-0.019233&0.000955&-0.018866&0.001329\\
+        $\sigma^2_u = 2.0$&-0.024866&0.002008&-0.025077&0.001785&-0.025835&0.001001\\
+        $\sigma^2_u = 2.5$&-0.030725&0.002796&-0.030205&0.003343&-0.030965&0.002552\\
+        $\sigma^2_u = 3.0$&-0.035638&0.004529&-0.035464&0.004732&-0.034195&0.006041\\
+        $\sigma^2_u = 4.5$&-0.047532&0.012747&-0.047863&0.012389&-0.047730&0.012474\\
+        $\sigma^2_u = 6.0$&-0.053997&0.026746&-0.054018&0.026632&-0.055230&0.025393\\
+        $\sigma^2_u = 8.0$&-0.063497&0.044623&-0.062978&0.045236&-0.060738&0.047766\\
+        $\sigma^2_u = 10.0$&-0.066641&0.070167&-0.065806&0.070902&-0.065357&0.071511\\
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under Student's $t$-distributed observation error with different variances $\sigma^2_u$, and under Student's $t$-distributed residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_t}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&0.002021&0.001761&0.002213&0.001939&0.002321&0.002065\\
+        $\sigma^2_u = 2.0$&0.002921&0.002473&0.003258&0.002809&0.003236&0.002744\\
+        $\sigma^2_u = 2.5$&0.004083&0.003415&0.004288&0.003668&0.004529&0.003870\\
+        $\sigma^2_u = 3.0$&0.005745&0.004929&0.005835&0.005041&0.005557&0.004851\\
+        $\sigma^2_u = 4.5$&0.011736&0.010821&0.011447&0.010442&0.010748&0.009719\\
+        $\sigma^2_u = 6.0$&0.013428&0.013042&0.013088&0.012611&0.014464&0.013965\\
+        $\sigma^2_u = 8.0$&0.018133&0.019265&0.017601&0.018818&0.017577&0.019249\\
+        $\sigma^2_u = 10.0$&0.020794&0.025946&0.019452&0.024433&0.019140&0.024228\\
+    \end{tabular}
+\end{table}
 
 \subsubsection{$\chi^2$-distributed observation error}
 
