@@ -463,6 +463,90 @@ and that this difference is in general increasing in $\sigma^2_u$.
 
 \subsubsection{$\chi^2$-distributed observation error}
 
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under $\chi^2$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MBE_chi}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&-0.018714&0.001479&-0.018709&0.001491&-0.018640&0.001558\\
+        $\sigma^2_u = 2.0$&-0.025420&0.001430&-0.024128&0.002761&-0.025012&0.001851\\
+        $\sigma^2_u = 2.5$&-0.030573&0.002949&-0.031135&0.002355&-0.031329&0.002149\\
+        $\sigma^2_u = 3.0$&-0.036298&0.003864&-0.036901&0.003226&-0.037024&0.003085\\
+        $\sigma^2_u = 4.5$&-0.054917&0.004847&-0.055502&0.004227&-0.054086&0.005756\\
+        $\sigma^2_u = 6.0$&-0.072913&0.006221&-0.072631&0.006482&-0.072691&0.006443\\
+        $\sigma^2_u = 8.0$&-0.097304&0.007052&-0.095563&0.009114&-0.097776&0.006451\\
+        $\sigma^2_u = 10.0$&-0.119601&0.009722&-0.119559&0.009724&-0.117377&0.012370\\
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under $\chi^2$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_chi}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&0.002214&0.001963&0.002375&0.002129&0.002378&0.002131\\
+        $\sigma^2_u = 2.0$&0.003024&0.002552&0.002964&0.002557&0.003111&0.002658\\
+        $\sigma^2_u = 2.5$&0.003698&0.003029&0.003881&0.003179&0.003957&0.003242\\
+        $\sigma^2_u = 3.0$&0.004428&0.003481&0.004697&0.003716&0.004774&0.003782\\
+        $\sigma^2_u = 4.5$&0.007516&0.005330&0.007542&0.005260&0.007606&0.005527\\
+        $\sigma^2_u = 6.0$&0.011204&0.007381&0.011033&0.007194&0.011208&0.007384\\
+        $\sigma^2_u = 8.0$&0.016869&0.009983&0.016494&0.009954&0.016978&0.009951\\
+        $\sigma^2_u = 10.0$&0.022575&0.012067&0.022936&0.012550&0.022595&0.012841\\
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Difference between $\chi^2$-distributed error case and normal-distributed error case: Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
+    \label{Tab:MBE_diff_t_normal}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&0.000752&0.000768&0.000034&0.000038&0.000289&0.000301\\
+        $\sigma^2_u = 2.0$&-0.000214&-0.000225&-0.000150&-0.000159&0.000253&0.000249\\
+        $\sigma^2_u = 2.5$&0.000335&0.000342&-0.000712&-0.000751&-0.000442&-0.000486\\
+        $\sigma^2_u = 3.0$&0.000667&0.000724&-0.000274&-0.000301&-0.000122&-0.000133\\
+        $\sigma^2_u = 4.5$&0.000086&0.000077&0.000672&0.000725&0.002353&0.002585\\
+        $\sigma^2_u = 6.0$&-0.000895&-0.000981&-0.001225&-0.001371&0.000728&0.000827\\
+        $\sigma^2_u = 8.0$&-0.000651&-0.000698&0.000460&0.000566&-0.000963&-0.001188\\
+        $\sigma^2_u = 10.0$&-0.000459&-0.000504&0.001698&0.001944&0.000557&0.000492\\
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Difference between $\chi^2$-distributed error case and normal-distributed error case: Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_diff_t_normal}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&0.000165&0.000202&0.000255&0.000267&0.000124&0.000139\\
+        $\sigma^2_u = 2.0$&0.000223&0.000221&0.000216&0.000219&0.000090&0.000105\\
+        $\sigma^2_u = 2.5$&0.000251&0.000290&0.000318&0.000285&0.000147&0.000118\\
+        $\sigma^2_u = 3.0$&0.000108&0.000167&0.000274&0.000264&0.000190&0.000188\\
+        $\sigma^2_u = 4.5$&0.000298&0.000334&0.000164&0.000253&0.000202&0.000538\\
+        $\sigma^2_u = 6.0$&0.000783&0.000742&0.000788&0.000666&0.000498&0.000697\\
+        $\sigma^2_u = 8.0$&0.001088&0.001163&0.000785&0.001079&0.000928&0.000860\\
+        $\sigma^2_u = 10.0$&0.000562&0.000489&0.000516&0.001191&0.000705&0.001015\\
+    \end{tabular}
+\end{table}
+
 \subsection{Estimation of $\sigma^2_\epsilon$}
 
 \subsubsection{Absence of observation error}
