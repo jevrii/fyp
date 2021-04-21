@@ -24,14 +24,25 @@ Consider the problem of regression through the origin with only one explanatory 
 y = \beta x + \epsilon
 \]
 
-In real life applications, usually we will first obtain pairs of observations $(\tilde{x}_i, \tilde{y}_i)$, then apply a model by performing linear regression on the data. However, we only have observations on the observed $\tilde{x}_i = x_i + u_i$ and $\tilde{y}_i = y_i + v_i$, which have some additive error compared to the true $x$ and $y$ that these model assumptions are based on. We further assume that the measurement errors $u_i$ and $v_i$ have mean zero and constant variances, and that the
-measurement error is uncorrelated and independent to the true values $x$ and $y$. This gives rise to the \textit{errors-in-variables model}. This imposes a different problem from the classical linear regression model, because the classical model assumes that the observed $\tilde{x}$ is nonrandom, that we have access to the true value of explanatory variable $x$ without any error. 
+In real life applications, usually we will first obtain pairs of observations $(\tilde{x}_i, \tilde{y}_i)$, then apply a model by performing linear regression on the data.
+However, we only have observations on the observed $\tilde{x}_i = x_i + u_i$ and $\tilde{y}_i = y_i + v_i$, which have some additive error compared to the true $x$ and $y$ that these model assumptions are based on.
+We further assume that the measurement errors $u_i$ and $v_i$ have mean zero and constant variances, and that the measurement error is uncorrelated and independent to the true values $x$ and $y$.
+This gives rise to the \textit{errors-in-variables model}.
+This imposes a different problem from the classical linear regression model, because the classical model assumes that the observed $\tilde{x}$ is nonrandom, that we have access to the true value of explanatory variable $x$ without any error. 
 
-Furthermore, in the classical linear regression model, we often assume that the observed dependent variable $y$ is subject to some $\epsilon$ following $N(0, \sigma^2)$. However, the normality assumption often does not hold for real life datasets. For example, when the errors in the dataset have heavy-tails and/or have skewed shapes, then the normal assumption may not be appropriate. For instance, when dealing with datasets with heavy-tailed errors, one of the practices is to assume
-$t$-distributed errors instead of normal-distributed errors, as the light-tailedness of the normal distribution essentially implies that we assume that large errors occur with very low probability, which may not be true in datasets of poorer quality. To make the situation more complicated, in practice non-normality in errors may happen in both the residual $\epsilon$ and the observation matter $u$. Thus, there is a need to investigate the impacts of non-normality on the \textit{errors-in-variables model}. 
+Furthermore, in the classical linear regression model, we often assume that the observed dependent variable $y$ is subject to some $\epsilon$ following $N(0, \sigma^2)$.
+However, the normality assumption often does not hold for real life datasets.
+For example, when the errors in the dataset have heavy-tails and/or have skewed shapes, then the normal assumption may not be appropriate.
+For instance, when dealing with datasets with heavy-tailed errors, one of the practices is to assume $t$-distributed errors instead of normal-distributed errors,
+as the light-tailedness of the normal distribution essentially implies that we assume that large errors occur with very low probability, which may not be true in datasets of poorer quality.
+To make the situation more complicated, in practice non-normality in errors may happen in both the residual $\epsilon$ and the observation matter $u$.
+Thus, there is a need to investigate the impacts of non-normality on the \textit{errors-in-variables model}. 
 
-In this project, we investigate how the non-normality of errors in both the explanatory variable $x$ and the residual of the dependent variable $y$ affects the estimation of the regression coefficient $\hat{beta}$ and the estimation of variance of error $\sigma^2_\epsilon$. We first perform a literature review on existing results on the \textit{errors-in-variables model}. Then we will describe in detail the methodology computer simulation technique to produce results. Finally, we will present the results and findings from
-the computer simulations. The code used in this project can be found in the appendix.
+In this project, we investigate how the non-normality of errors in both the explanatory variable $x$ and the residual of the dependent variable $y$ affects the estimation of the regression coefficient $\hat{beta}$ and the estimation of variance of error $\sigma^2_\epsilon$.
+We first perform a literature review on existing results on the \textit{errors-in-variables model}.
+Then we will describe in detail the methodology computer simulation technique to produce results.
+Finally, we will present the results and findings from the computer simulations.
+The code used in this project can be found in the appendix.
 
 \section{Literature review}
 
@@ -45,9 +56,11 @@ If we substitute $\tilde{x} = x+u$ into $y = \beta x + \epsilon$, we obtain:
     y_i = \beta(\tilde{x}_i - u_i) + \epsilon_i = \beta \tilde{x} + (\epsilon - \beta u)
 \]
 
-As the measurement error in $x$ becomes part of the residual error term in the model, the exogeneity assumption of the Gauss-Markov theorem is violated as $cov(u, \tilde{x}) \neq 0$. Thus, the ordinary least-squares (OLS) estimator of $\beta$ may not be the \textit{best linear unbiased estimator}. Unlike the case of with measurement error, the OLS and MME estimators are different.
-In fact, We will see that the OLS estimators of $\beta$ and $\sigma_\epsilon^2$ are biased. In order to obtain unbiased and consistent estimates, we would have to resort to the method of moments (MME)
-estimators instead. 
+As the measurement error in $x$ becomes part of the residual error term in the model, the exogeneity assumption of the Gauss-Markov theorem is violated as $cov(u, \tilde{x}) \neq 0$.
+Thus, the ordinary least-squares (OLS) estimator of $\beta$ may not be the \textit{best linear unbiased estimator}.
+Unlike the case of with measurement error, the OLS and MME estimators are different.
+In fact, We will see that the OLS estimators of $\beta$ and $\sigma_\epsilon^2$ are biased. 
+n order to obtain unbiased and consistent estimates, we would have to resort to the method of moments (MME) estimators instead. 
 
 \subsection{OLS and MME for $\beta$}
 
@@ -73,7 +86,9 @@ This $\lambda$ is also called the reliability or signal-to-variance ratio.
 
 Therefore, we can see that the OLS estimator $\hat{\beta}$ is biased towards zero because $0 < \lambda < 1$. The sign of the bias depends on the sign of the true $\beta$.
 
-In order to obtain consistent estimates for $\beta$, we can use the MME estimator instead. Suppose we have some prior knowledge on the measurement errors and have obtained the value of $\sigma_x^2$, $\sigma_u^2$ or $\lambda$. Then we can apply the appropriate adjustment for the bias in the OLS $\hat{\beta}$ as $\sigma^2_{\tilde{x}} = \sigma^2_x + \sigma^2_u$, and $\sigma^2_{\tilde{x}}$ can be directly measured from the observed data. 
+In order to obtain consistent estimates for $\beta$, we can use the MME estimator instead.
+Suppose we have some prior knowledge on the measurement errors and have obtained the value of $\sigma_x^2$, $\sigma_u^2$ or $\lambda$.
+Then we can apply the appropriate adjustment for the bias in the OLS $\hat{\beta}$ as $\sigma^2_{\tilde{x}} = \sigma^2_x + \sigma^2_u$, and $\sigma^2_{\tilde{x}}$ can be directly measured from the observed data. 
 
 Some MME estimators for $\beta$ using the first and second moments alone are shown below:
 
@@ -114,7 +129,8 @@ We can further obtain the OLS estimated variance as we assumed earlier that $\ep
     \textrm{plim } \hat{\sigma^2_\epsilon} = \sigma_\epsilon^2 + (1-\lambda)^2 \beta^2 \sigma_x^2 + \lambda^2 \beta^2 \sigma_u^2   
 \]
 
-In order to obtain the MME estimator for $\sigma^2_\epsilon$, similar to the case for $\hat{\beta}_{MME}$, if we have some prior knowledge on the observation error, we can obtain consistent estimates for $\sigma_x^2$, $\sigma_u$, $\lambda$ and $\beta$. Thus, rearranging the expression for $\hat{\sigma^2_\epsilon}$ gives:
+In order to obtain the MME estimator for $\sigma^2_\epsilon$, similar to the case for $\hat{\beta}_{MME}$, if we have some prior knowledge on the observation error, we can obtain consistent estimates for $\sigma_x^2$, $\sigma_u$, $\lambda$ and $\beta$.
+Thus, rearranging the expression for $\hat{\sigma^2_\epsilon}$ gives:
 
 \[
     \hat{\sigma_\epsilon^2}_{MME} = \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 \sigma_x^2 - \lambda^2 \hat{\beta}_{MME}^2 \sigma_u^2   
