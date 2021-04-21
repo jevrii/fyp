@@ -12,7 +12,9 @@
 
 \maketitle
 
-\section{Abstract}
+\begin{abstract}
+    This is the abstract of the paper.
+\end{abstract}
 
 \section{Introduction}
 
@@ -215,7 +217,7 @@ We similarly compare the simulation outcomes under the cases of absence of obser
 
 \subsection{Estimation of $\beta$}
 
-We use the following estimators of $\beta$ and apply them to the generated observation data $(x_i, y_i)$:
+We use the following estimators of $\beta$ and apply them to the generated observation data $(\tilde{x}_i, y_i)$:
 
 \begin{equation}
     \begin{split}
@@ -574,6 +576,15 @@ For the MSE, the difference is always positive, meaning that the MSE for $\chi^2
 The difference seems to be increasing in $\sigma^2_u$, but the trend is not that clear. 
 
 \subsection{Estimation of $\sigma^2_\epsilon$}
+
+We use the following estimators of $\sigma^2_\epsilon$ and apply them to the generated observation data $(\tilde{x}_i, y_i)$:
+
+\begin{equation}
+    \begin{split}
+        \hat{\sigma^2_\epsilon}_{OLS} &= \cdots\\
+        \hat{\sigma^2_\epsilon}_{MME} &= \cdots\\
+    \end{split}
+\end{equation}
 
 \subsubsection{Absence of observation error}
 
