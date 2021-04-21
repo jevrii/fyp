@@ -604,7 +604,50 @@ We use the following estimators of $\sigma^2_\epsilon$ and apply them to the gen
 
 \subsubsection{Absence of observation error}
 
+Under the absence of observation error, the OLS and MME estimators of $\sigma^2_\epsilon$ are the same.
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MBE of $\sigma^2_\epsilon$ when $\sigma^2_u=0$, under different distributions and variance of $\epsilon$.}
+    \label{Tab:MBE_sigma_absence}
+    \begin{tabular}[t]{lccc}
+        \hline
+        &Normal&Student's $t$&$\chi^2$\\
+        \hline
+        $\sigma^2_\epsilon = 1.5$&0.000038&0.006738&-0.009608\\
+        $\sigma^2_\epsilon = 2.0$&0.000135&-0.010998&-0.005749\\
+        $\sigma^2_\epsilon = 2.5$&-0.001355&0.018754& 0.026852\\
+        \hline
+    \end{tabular}
+\end{table}
+
+Table \ref{Tab:MBE_sigma_absence} summarizes the MBE of $\sigma^2_\epsilon$ when $\sigma^2_u=0$ for different error distributions.
+Similar to the case of $\hat{\beta}$, there seems to be no clear monotonic trend of the MBE from the simulations performed under different distributions. 
+
+TODO: MSE
+
 \subsubsection{Normal-distributed observation error}
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_sigma_normal}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&5.926186&-0.020097&5.948523&-0.002287&5.959125&0.009263\\
+        $\sigma^2_u = 2.0$&7.899212&-0.010990&7.894566&-0.025564&7.879937&-0.030257\\
+        $\sigma^2_u = 2.5$&9.847068&-0.017748&9.820112&-0.049965&9.828089&-0.037909\\
+        $\sigma^2_u = 3.0$&11.779315&-0.026754&11.774199&-0.036579&11.781405&-0.026324\\
+        $\sigma^2_u = 4.5$&17.528329&-0.038941&17.494462&-0.051265&17.404521&-0.135882\\
+        $\sigma^2_u = 6.0$&23.125599&-0.128717&23.076096&-0.192517&23.008288&-0.211301\\
+        $\sigma^2_u = 8.0$&30.273689&-0.357943&30.476661&-0.177604&30.579994&-0.049411\\
+        $\sigma^2_u = 10.0$&37.357866&-0.546279&37.606960&-0.207364&37.818907&-0.142453\\
+    \end{tabular}
+\end{table}
 
 \subsubsection{Student's $t$-distributed observation error}
 
