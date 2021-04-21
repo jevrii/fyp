@@ -339,7 +339,7 @@ We perform the similar simulations for Student's $t$ distributed observation err
 Elementary statistical theory tells us that the variance for a Student's $t$ distribution with $\nu > 0$ degrees of freedom has variance equal to $\frac{\nu}{\nu-2}$.
 Taking inverse of the equation $\sigma^2 = \frac{\nu}{\nu-2}$ gives $\nu = 2 \cdot \frac{\sigma^2}{\sigma^2-1}$.
 Note that the range of $\sigma^2_u$ and $\sigma^2_\epsilon$ are specially chosen such that $\nu > 2$ because the Student's $t$ distribution only has finite variance when $\nu > 2$.
-Thus, in the tables shown below, when we write $\sigma^2 = \delta$, it means the simulation trial was performed using the Student's $t$ distribution with $2 \cdot \frac{\delta}{\delta-1}$
+Thus, in the tables shown below, when we write $\sigma^2 = \delta$, it means the simulation trial was performed using the Student's $t$ distribution with $2 \cdot \frac{\delta}{\delta-1}$ degrees of freedom.
 
 Table \ref{Tab:MBE_t} and Table \ref{Tab:MSE_t} summarize the simulated MBE and MSE of the estimation of $\beta$ respectively, under Student's $t$-distributed errors.
 
@@ -388,7 +388,8 @@ Table \ref{Tab:MBE_t} and Table \ref{Tab:MSE_t} summarize the simulated MBE and 
 We first focus on the observations based solely on the Student's $t$-distributed error simulations. This will be followed by comparing the results in normal-distributed errors and Student's $t$-distributed errors. 
 
 Firstly, similar to the normal-distributed errors case, we observe that the MBE of $\hat{\beta}_{OLS}$ is negative and decreasing in $\sigma^2_u$,
-and that the MBE of $\hat{\beta}_{MME}$ is positive and increasing in $\sigma^2_u$. The MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ are both increasing in $\sigma^2_u$.
+and that the MBE of $\hat{\beta}_{MME}$ is positive and increasing in $\sigma^2_u$.
+The MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ are both increasing in $\sigma^2_u$.
 
 However, when comparing $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$,
 we find that switching from $\hat{\beta}_{OLS}$ to $\hat{\beta}_{MME}$ does not provide that much of a decrease in absolute MBE or MSE
@@ -463,6 +464,13 @@ and that this difference is in general increasing in $\sigma^2_u$.
 
 \subsubsection{$\chi^2$-distributed observation error}
 
+We perform the similar simulations for $\chi^2$ distributed observation error and residual error for different variances.
+From elementary statistical theory, a $\chi^2$ distribution with $k > 0$ degrees of freedom has mean $k$ and variance $2k$.
+To let the distribution follow the model assumptions to have mean zero, we subtract $k$ from each value drawn from the distribution.
+Thus, when we write $\sigma^2 = \delta$, it means the simulation trial was performed using the $\chi^2$ distribution with $2 \cdot \frac{\delta}{2}$ degrees of freedom minus $\frac{\delta}{2}$ to recenter the mean to zero.
+
+Table \ref{Tab:MBE_chi} and Table \ref{Tab:MSE_chi} summarize the simulated MBE and MSE of the estimation of $\beta$ respectively, under $\chi^2$-distributed errors.
+
 \begin{table}[ht]
     \centering
     \caption{Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under $\chi^2$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
@@ -505,10 +513,20 @@ and that this difference is in general increasing in $\sigma^2_u$.
     \end{tabular}
 \end{table}
 
+For the MBE and MSE, we have similar observations to the normal-distributed errors and Student's $t$-distributed errors cases,
+where the MBE of $\hat{\beta}_{OLS}$ is negative and decreasing in $\sigma^2_u$, 
+and the MBE of $\hat{\beta}_{MME}$ is positive and increasing in $\sigma^2_u$.
+Similar to before, the MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ are both increasing in $\sigma^2_u$.
+
+To compare findings between the normal-distributed errors and $\chi^2$-distributed errors case,
+we again take the cell difference from the two distributions in their MBE and MSE respectively.
+The difference here is $(\textrm{value from } \chi^2) - (\textrm{value from normal})$. 
+These differences are tabulated in Tables \ref{Tab:MBE_diff_chi_normal} and \ref{Tab:MSE_diff_chi_normal} respectively.
+
 \begin{table}[ht]
     \centering
     \caption{Difference between $\chi^2$-distributed error case and normal-distributed error case: Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
-    \label{Tab:MBE_diff_t_normal}
+    \label{Tab:MBE_diff_chi_normal}
     \begin{tabular}[t]{lcccccc}
         \hline
         &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
@@ -529,7 +547,7 @@ and that this difference is in general increasing in $\sigma^2_u$.
 \begin{table}[ht]
     \centering
     \caption{Difference between $\chi^2$-distributed error case and normal-distributed error case: Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
-    \label{Tab:MSE_diff_t_normal}
+    \label{Tab:MSE_diff_chi_normal}
     \begin{tabular}[t]{lcccccc}
         \hline
         &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
@@ -546,6 +564,8 @@ and that this difference is in general increasing in $\sigma^2_u$.
         $\sigma^2_u = 10.0$&0.000562&0.000489&0.000516&0.001191&0.000705&0.001015\\
     \end{tabular}
 \end{table}
+
+
 
 \subsection{Estimation of $\sigma^2_\epsilon$}
 
