@@ -628,9 +628,33 @@ TODO: MSE
 
 \subsubsection{Normal-distributed observation error}
 
+We again perform the estimation of $\sigma^2_\epsilon$ under normal-distributed observation error and normal-distributed residual error, both using different variances.
+The simulated MBE and MSE are tabulated in Tables \ref{Tab:MBE_sigma_normal} and \ref{Tab:MSE_sigma_normal} respectively.
+
 \begin{table}[ht]
     \centering
     \caption{Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MBE_sigma_normal}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&5.944546&-0.005842&5.959183&0.010743&5.931388&-0.014544\\
+        $\sigma^2_u = 2.0$&7.886910&-0.024392&7.899105&-0.010766&7.826871&-0.081642\\
+        $\sigma^2_u = 2.5$&9.825091&-0.041342&9.837348&-0.020427&9.810995&-0.038816\\
+        $\sigma^2_u = 3.0$&11.752766&-0.042576&11.827087&0.014613&11.813583&0.010360\\
+        $\sigma^2_u = 4.5$&17.563742&-0.015657&17.409776&-0.158051&17.471703&-0.083689\\
+        $\sigma^2_u = 6.0$&23.104857&-0.118361&23.084622&-0.121116&23.031219&-0.217114\\
+        $\sigma^2_u = 8.0$&30.385471&-0.234288&30.443624&-0.211370&30.481465&-0.197597\\
+        $\sigma^2_u = 10.0$&37.582805&-0.319186&37.466108&-0.471654&37.645894&-0.250725\\
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MSE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
     \label{Tab:MSE_sigma_normal}
     \begin{tabular}[t]{lcccccc}
         \hline
@@ -638,16 +662,22 @@ TODO: MSE
         \hline
         &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
         \hline
-        $\sigma^2_u = 1.5$&5.926186&-0.020097&5.948523&-0.002287&5.959125&0.009263\\
-        $\sigma^2_u = 2.0$&7.899212&-0.010990&7.894566&-0.025564&7.879937&-0.030257\\
-        $\sigma^2_u = 2.5$&9.847068&-0.017748&9.820112&-0.049965&9.828089&-0.037909\\
-        $\sigma^2_u = 3.0$&11.779315&-0.026754&11.774199&-0.036579&11.781405&-0.026324\\
-        $\sigma^2_u = 4.5$&17.528329&-0.038941&17.494462&-0.051265&17.404521&-0.135882\\
-        $\sigma^2_u = 6.0$&23.125599&-0.128717&23.076096&-0.192517&23.008288&-0.211301\\
-        $\sigma^2_u = 8.0$&30.273689&-0.357943&30.476661&-0.177604&30.579994&-0.049411\\
-        $\sigma^2_u = 10.0$&37.357866&-0.546279&37.606960&-0.207364&37.818907&-0.142453\\
+        $\sigma^2_u = 1.5$&39.106310&3.818130&39.828669&4.367114&40.113631&4.986267\\
+        $\sigma^2_u = 2.0$&68.251852&6.135680&69.143363&6.878215&68.728170&7.618354\\
+        $\sigma^2_u = 2.5$&105.404358&9.135046&106.313434&9.829482&106.637167&10.601876\\
+        $\sigma^2_u = 3.0$&149.786174&11.983789&153.149474&13.570971&153.738092&14.681478\\
+        $\sigma^2_u = 4.5$&334.039435&26.905638&328.920230&26.949451&333.116014&29.293710\\
+        $\sigma^2_u = 6.0$&575.168146&44.066269&576.296059&46.827447&575.827556&48.625474\\
+        $\sigma^2_u = 8.0$&993.932566&78.364319&999.708303&80.049208&1003.433290&81.952748\\
+        $\sigma^2_u = 10.0$&1517.354461&120.073998&1511.381767&122.354870&1528.536252&126.664946\\
     \end{tabular}
 \end{table}
+
+For $\hat{\sigma^2_\epsilon}_{OLS}$, from the literature review, we know that $\textrm{plim } \hat{\sigma^2_\epsilon}_{OLS} = \sigma_\epsilon^2 + (1-\lambda)^2 \beta^2 \sigma_x^2 + \lambda^2 \beta^2 \sigma_u^2$, meaning that there is a positive bias of $\hat{\sigma^2_\epsilon}_{OLS}$. 
+Indeed, we observe that the MBE of $\hat{\sigma^2_\epsilon}_{OLS}$, is positive for all simulated values of $\sigma^2_u$ and $\sigma^2_\epsilon$.
+The MBE is increasing in $\sigma^2_u$ and there is no clear monotonic trend of MBE with $\sigma^2_\epsilon$, which are both consistent with the expression of additional bias terms in the explicit derivation of $\textrm{plim } \hat{\sigma^2_\epsilon}_{OLS}$.
+
+On the other hand, for $\hat{\sigma^2_\epsilon}_{MME}$, the MBE is negative and roughly decreasing with $\sigma^2_u$. There is no clear trend with $\sigma^2_\epsilon$. 
 
 \subsubsection{Student's $t$-distributed observation error}
 
