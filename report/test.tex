@@ -22,9 +22,9 @@
 
 Consider the problem of regression through the origin with only one explanatory variable:
 
-\[
+\begin{equation}
 y = \beta x + \epsilon
-\]
+\end{equation}
 
 In real life applications, usually we will first obtain pairs of observations $(\tilde{x}_i, \tilde{y}_i)$, then apply a model by performing linear regression on the data.
 However, we only have observations on the observed $\tilde{x}_i = x_i + u_i$ and $\tilde{y}_i = y_i + v_i$, which have some additive error compared to the true $x$ and $y$ that these model assumptions are based on.
@@ -54,9 +54,9 @@ Suppose we wish to estimate the relationship $y = \beta x + \epsilon$, but we on
 
 If we substitute $\tilde{x} = x+u$ into $y = \beta x + \epsilon$, we obtain:
 
-\[
+\begin{equation}
     y_i = \beta(\tilde{x}_i - u_i) + \epsilon_i = \beta \tilde{x} + (\epsilon - \beta u)
-\]
+\end{equation}
 
 As the measurement error in $x$ becomes part of the residual error term in the model, the exogeneity assumption of the Gauss-Markov theorem is violated as $cov(u, \tilde{x}) \neq 0$.
 Thus, the ordinary least-squares (OLS) estimator of $\beta$ may not be the \textit{best linear unbiased estimator}.
@@ -68,21 +68,21 @@ n order to obtain unbiased and consistent estimates, we would have to resort to 
 
 Suppose we use the ordinary least-squares (OLS) estimator for $\beta$:
 
-\[
+\begin{equation}
 \hat{\beta} = \frac{cov(\tilde{x, y})}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}
-\]
+\end{equation}
 
 Because $\epsilon$, $u$ and $x$ are independent to each other, we can obtain
 
-\[
+\begin{equation}
 \textrm{plim } \hat{\beta} = \frac{\beta \sigma^2_x}{\sigma^2_x + \sigma^2_u} = \lambda \beta
-\]
+\end{equation}
 
 where
 
-\[
+\begin{equation}
 \lambda \equiv \frac{\sigma_x^2}{\sigma_x^2 + \sigma_u^2}
-\]
+\end{equation}
 
 This $\lambda$ is also called the reliability or signal-to-variance ratio.
 
@@ -127,16 +127,16 @@ Thus, we can see that the true error term is obfuscated by two additional source
 
 We can further obtain the OLS estimated variance as we assumed earlier that $\epsilon$, $x$ and $u$ are uncorrelated:
 
-\[
+\begin{equation}
     \textrm{plim } \hat{\sigma^2_\epsilon} = \sigma_\epsilon^2 + (1-\lambda)^2 \beta^2 \sigma_x^2 + \lambda^2 \beta^2 \sigma_u^2   
-\]
+\end{equation}
 
 In order to obtain the MME estimator for $\sigma^2_\epsilon$, similar to the case for $\hat{\beta}_{MME}$, if we have some prior knowledge on the observation error, we can obtain consistent estimates for $\sigma_x^2$, $\sigma_u$, $\lambda$ and $\beta$.
 Thus, rearranging the expression for $\hat{\sigma^2_\epsilon}$ gives:
 
-\[
+\begin{equation}
     \hat{\sigma_\epsilon^2}_{MME} = \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 \sigma_x^2 - \lambda^2 \hat{\beta}_{MME}^2 \sigma_u^2   
-\]
+\end{equation}
 
 \section{Methodology}
 
