@@ -2,6 +2,8 @@
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage[ruled,vlined]{algorithm2e}
+\usepackage{listings}
+\usepackage[margin=1.0in]{geometry}
 \setlength{\parskip}{1em}
 \renewcommand{\algorithmcfname}{Procedure}
 \title{Investigation of Non-normality in a Simple Errors-in-variables Model}
@@ -679,6 +681,7 @@ The MBE is increasing in $\sigma^2_u$ and there is no clear monotonic trend of M
 
 On the other hand, for $\hat{\sigma^2_\epsilon}_{MME}$, the MBE is negative and roughly decreasing with $\sigma^2_u$. There is no clear trend with $\sigma^2_\epsilon$. 
 
+
 \subsubsection{Student's $t$-distributed observation error}
 
 We perform the similar simulations and estimation of $\sigma^2_\epsilon$ under the case of Student's $t$-distributed observation error and residual error.
@@ -731,15 +734,81 @@ We find that the estimation accuracy when using $\hat{\sigma^2_\epsilon}_{MME}$ 
 Similar to the case of estimating $\beta$, we also find that when $\sigma^2_u$ increases, the improvement of using $\hat{\sigma^2_\epsilon}_{MME}$ instead of $\hat{\sigma^2_\epsilon}_{OLS}$ decreases.
 In fact, we see that when $\sigma^2_u = 10.0$, the MSE of $\hat{\sigma^2_\epsilon}_{MME}$ is greater than that of $\hat{\sigma^2_\epsilon}_{OLS}$. 
 
+To compare the findings between normal-distributed errors and Student's $t$ distributed errors, we take differences in a fashion similar to the previous sections.
+The differences are tabulated in Tables \ref{Tab:MBE_sigma_diff_t} and \ref{Tab:MSE_sigma_diff_t} respectively:
+
+\begin{table}[ht]
+    \centering
+    \caption{Difference between Student's $t$-distributed error case and normal-distributed error case: Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
+    \label{Tab:MBE_sigma_diff_t}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&-0.066959&-0.069825&0.001343&0.002872&-0.000262&0.000937\\
+        $\sigma^2_u = 2.0$&-0.109399&-0.114493&0.016825&0.012610&-0.150998&-0.158049\\
+        $\sigma^2_u = 2.5$&-0.430338&-0.443487&-0.183308&-0.187789&-0.298113&-0.310561\\
+        $\sigma^2_u = 3.0$&-0.803268&-0.836666&-0.559063&-0.595413&-0.515155&-0.526378\\
+        $\sigma^2_u = 4.5$&-2.704054&-2.880683&-2.761439&-2.954847&-2.155957&-2.311831\\
+        $\sigma^2_u = 6.0$&-6.380179&-6.874139&-6.318024&-6.798425&-5.968561&-6.496184\\
+        $\sigma^2_u = 8.0$&-11.271448&-12.496345&-11.273698&-12.442319&-10.695063&-11.949910\\
+        $\sigma^2_u = 10.0$&-15.743113&-17.890013&-16.732464&-19.050908&-16.942578&-19.309470\\
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Difference between $\chi^2$-distributed error case and normal-distributed error case: Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_sigma_diff_t}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&2.567444&3.439570&4.459091&4.544724&17.715820&17.829044\\
+        $\sigma^2_u = 2.0$&16.250164&18.866020&22.518222&23.336357&30.675791&34.186680\\
+        $\sigma^2_u = 2.5$&45.666405&57.182168&71.846646&79.995463&109.022235&119.665395\\
+        $\sigma^2_u = 3.0$&90.881267&117.709726&144.389898&167.697770&153.319059&176.251063\\
+        $\sigma^2_u = 4.5$&340.965781&477.641574&315.979763&453.268744&521.592655&650.493605\\
+        $\sigma^2_u = 6.0$&236.006213&605.414741&277.237814&647.609167&385.797868&751.716660\\
+        $\sigma^2_u = 8.0$&217.295838&1082.203769&267.746928&1137.929792&334.182042&1169.656013\\
+        $\sigma^2_u = 10.0$&364.077884&1927.985594&164.195051&1764.231817&45.362629&1644.894215\\
+    \end{tabular}
+\end{table}
+
+For MBE, we observe that the differences for both $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ are both all negative and decreasing in $\sigma^2_u$.
+As the MBE for $\hat{\sigma^2_\epsilon}_{OLS}$ is positive for both normal errors and Student's $t$ errors, this means that the MBE for $\hat{\sigma^2_\epsilon}_{OLS}$ is closer to zero for Student's $t$ errors.
+However, for $\hat{\sigma^2_\epsilon}_{MME}$, as the MBE is negative for both types of errors, this means that $\hat{\sigma^2_\epsilon}_{MME}$ has a mean bias further away from zero under Student's $t$ errors.
+
+For MSE, we observe that the difference is positive and increasing in $\sigma^2_u$. The difference for $\hat{\sigma^2_\epsilon}_{MME}$ is greater than that of $\hat{\sigma^2_\epsilon}_{OLS}$ for the same values of $\sigma^2_u$ and $\sigma^2_\epsilon$.
+
 \subsubsection{$\chi^2$-distributed observation error}
 
 \section{Conclusion}
 
+This report presents some epirical results on the case of non-normality under the errors-in-variables model. 
+
 \subsection{Further work}
+
+Exact inference
+
+Exist better estimators
+
+Inference of parameters
 
 \section{Acknowledgments}
 
+I would like to thank Dr. Raymond W.L. WONG for his support and guidance for this directed studies.
+I would also like to thank the HKU Department of Statistics and Actuarial Science for providing me with this opportunity to pursure in this directed studies capstone project.
+
 \section{Appendix}
+
+The computer code used in this project can be found at \url{https://github.com/jevrii/fyp}.
+
+\lstinputlisting[language=Python]{Sim.py}
 
 \begin{thebibliography}{9}
 
