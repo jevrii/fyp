@@ -101,18 +101,19 @@ Some MME estimators for $\beta$ using the first and second moments alone are sho
         \hline
         Assumption&Method of Moments Estimator\\
         \hline
-        $\sigma_x^2$ known&--\\
-        $\sigma_u^2$ known&$\frac{\sigma^2_{\tilde{x}}}{\sigma^2_{\tilde{x}} - \sigma^2_u}$\\
-        Reliability ratio $\lambda$ known&--\\
+        $\sigma^2_x$ known&$\frac{cov(\tilde{x}, y)}{\sigma^2_x}$\\
+        $\sigma^2_u$ known&$\frac{cov(\tilde{x}, y)}{var(\tilde{x}) - \sigma^2_u}$\\
+        Reliability ratio $\lambda$ known&$\frac{cov(\tilde{x}, y)}{\lambda var(\tilde{x})}$\\
         \hline
     \end{tabular}
 \end{table}%
 
-For example, in practice, we can obtain the values of $\sigma_u^2$ via repeated measurements \cite{mmereport}.
+There are practical methods available to obtain information on the measurement errors. For example, to obtian the value of $\sigma^2_u$, we can perform repeated measurements \cite{mmereport}. To obtain the reliability ratio $\lambda$, we can use methods including "intraclass correlation via an internal replication study" \cite{mmereport}.
 
 \subsection{OLS and MME for $\sigma_\epsilon^2$}
 
-The usual way in OLS to estimate $\sigma_\epsilon^2$ is to calculate $\hat{\sigma^2_\epsilon}$ as the sum of squares of the residuals divided by the degrees of freedom $n-d$. To find out what happens to $\hat{\sigma^2_\epsilon}$, we can first look at what happens to the estimated residual variance first \cite{lecturenotes}:
+The usual way in OLS to estimate $\sigma_\epsilon^2$ is to calculate $\hat{\sigma^2_\epsilon}$ as the sum of squares of the residuals divided by the degrees of freedom $n-d$.
+To find out what happens to $\hat{\sigma^2_\epsilon}$, we can first look at what happens to the estimated residual variance first \cite{lecturenotes}:
 
 \begin{equation}
     \begin{split}
@@ -135,7 +136,15 @@ In order to obtain the MME estimator for $\sigma^2_\epsilon$, similar to the cas
 Thus, rearranging the expression for $\hat{\sigma^2_\epsilon}$ gives:
 
 \begin{equation}
+    \label{eq:sigma_MME}
     \hat{\sigma_\epsilon^2}_{MME} = \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 \sigma_x^2 - \lambda^2 \hat{\beta}_{MME}^2 \sigma_u^2   
+\end{equation}
+
+Based on the relation $\tilde{x_i} = x_i + u_i$, we can obtain $var(x) = var(\tilde{x}) - var(u)$.
+Thus, if $\sigma^2_u$ is known, and we use $var(x)$ as an estimator for $\sigma^2_x$, we can substitute into \ref{eq:sigma_MME}:
+
+\begin{equation}
+    \hat{\sigma_\epsilon^2}_{MME} = \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 \hat{\beta}_{MME}^2 \sigma_u^2
 \end{equation}
 
 \section{Methodology}
@@ -161,9 +170,9 @@ After generating the observation data, we perform estimations based on the obser
 \begin{equation}
     \begin{split}
         \hat{\beta}_{OLS} &= \frac{cov(\tilde{x, y})}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}\\
-        \hat{\beta}_{MME} &= \cdots\\
-        \hat{\sigma^2_\epsilon}_{OLS} &= \cdots\\
-        \hat{\sigma^2_\epsilon}_{MME} &= \cdots\\
+        \hat{\beta}_{MME} &= \frac{var(\tilde{x})}{var(\tilde{x}) - \sigma^2_u}\\
+        \hat{\sigma^2_\epsilon}_{OLS} &= var\left(y - \hat{\beta}_{OLS} \tilde{x}\right)\\
+        \hat{\sigma^2_\epsilon}_{MME} &= \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 \hat{\beta}_{MME}^2\\
     \end{split}
 \end{equation}
 
@@ -240,7 +249,7 @@ We use the following estimators of $\beta$ and apply them to the generated obser
 \begin{equation}
     \begin{split}
         \hat{\beta}_{OLS} &= \frac{cov(\tilde{x, y})}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}\\
-        \hat{\beta}_{MME} &= \cdots\\
+        \hat{\beta}_{MME} &= \frac{var(\tilde{x})}{var(\tilde{x}) - \sigma^2_u}\\
     \end{split}
 \end{equation}
 
