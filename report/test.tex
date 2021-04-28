@@ -655,7 +655,7 @@ The simulated MBE and MSE are tabulated in Tables \ref{Tab:MBE_sigma_normal} and
 \begin{table}[ht]
     \centering
     \caption{Estimation MSE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
-    \label{Tab:MSE_sigma_normal}
+    \label{Tab:MSE_sigma_t}
     \begin{tabular}[t]{lcccccc}
         \hline
         &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
@@ -680,6 +680,56 @@ The MBE is increasing in $\sigma^2_u$ and there is no clear monotonic trend of M
 On the other hand, for $\hat{\sigma^2_\epsilon}_{MME}$, the MBE is negative and roughly decreasing with $\sigma^2_u$. There is no clear trend with $\sigma^2_\epsilon$. 
 
 \subsubsection{Student's $t$-distributed observation error}
+
+We perform the similar simulations and estimation of $\sigma^2_\epsilon$ under the case of Student's $t$-distributed observation error and residual error.
+The MBE and MSE results are tabulated in Tables \ref{Tab:MBE_sigma_t} and \ref{Tab:MSE_sigma_t} respectively:
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MBE_sigma_t}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&5.901136&-0.051106&5.949806&0.002570&5.921078&-0.029820\\
+        $\sigma^2_u = 2.0$&7.808126&-0.103737&7.873660&-0.038787&7.785658&-0.128063\\
+        $\sigma^2_u = 2.5$&9.403487&-0.473446&9.674954&-0.187735&9.548231&-0.327451\\
+        $\sigma^2_u = 3.0$&10.991609&-0.841798&11.224290&-0.613500&11.263660&-0.552675\\
+        $\sigma^2_u = 4.5$&14.854718&-2.893005&14.739074&-3.008623&15.304472&-2.413692\\
+        $\sigma^2_u = 6.0$&16.737684&-6.991530&16.764042&-6.956211&17.054863&-6.659021\\
+        $\sigma^2_u = 8.0$&19.173947&-12.709664&19.076132&-12.745150&19.562751&-12.287313\\
+        $\sigma^2_u = 10.0$&21.736085&-18.363607&20.925550&-19.274530&20.519368&-19.725613\\ 
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MSE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_sigma_t}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&42.007008&7.330577&44.265186&9.028256&57.591174&22.712470\\
+        $\sigma^2_u = 2.0$&85.073222&25.150626&90.945333&30.167468&101.248433&41.912878\\
+        $\sigma^2_u = 2.5$&151.504695&66.572613&178.829111&90.060470&216.508799&130.531705\\
+        $\sigma^2_u = 3.0$&242.209257&130.228570&296.302408&181.223069&306.113309&190.717377\\
+        $\sigma^2_u = 4.5$&674.176226&504.183618&647.724335&480.312491&853.425135&679.140708\\
+        $\sigma^2_u = 6.0$&812.257778&650.836042&853.904589&694.262448&961.547494&800.543447\\
+        $\sigma^2_u = 8.0$&1213.885175&1159.121657&1260.906736&1218.715769&1323.105685&1251.042547\\
+        $\sigma^2_u = 10.0$&1873.268174&2046.381778&1691.114328&1887.541448&1558.572354&1770.970898\\
+    \end{tabular}
+\end{table}
+
+We find that the observations are similar to the case of estimating $\beta$ under Student's $t$-distributed errors: 
+We find that the estimation accuracy when using $\hat{\sigma^2_\epsilon}_{MME}$ instead of using $\hat{\sigma^2_\epsilon}_{OLS}$ is not as great as compared to the normal case.
+Similar to the case of estimating $\beta$, we also find that when $\sigma^2_u$ increases, the improvement of using $\hat{\sigma^2_\epsilon}_{MME}$ instead of $\hat{\sigma^2_\epsilon}_{OLS}$ decreases.
+In fact, we see that when $\sigma^2_u = 10.0$, the MSE of $\hat{\sigma^2_\epsilon}_{MME}$ is greater than that of $\hat{\sigma^2_\epsilon}_{OLS}$. 
 
 \subsubsection{$\chi^2$-distributed observation error}
 
