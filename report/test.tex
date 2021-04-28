@@ -190,7 +190,7 @@ After computing the estimators, we compute the bias and squared error of each of
 For the same observation error distribution and residual error distribution, we perform the whole observation data generation and estimation procedures for multiple iterations.
 This is to obtain more reliable conclusions on the mean bias (MBE) and mean squared error (MSE) of the estimators.
 
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
     \SetAlgoLined
     Initialize $\beta_{truth}$, $n$, $x_{lo}$, $x_{hi}$\;
     \ForAll{$\sigma^2_u \in \{\textrm{list of observation variance}\}$}{
@@ -627,8 +627,8 @@ We use the following estimators of $\sigma^2_\epsilon$ and apply them to the gen
 
 \begin{equation}
     \begin{split}
-        \hat{\sigma^2_\epsilon}_{OLS} &= \cdots\\
-        \hat{\sigma^2_\epsilon}_{MME} &= \cdots\\
+        \hat{\sigma^2_\epsilon}_{OLS} &= var\left(y - \hat{\beta}_{OLS} \tilde{x}\right)\\
+        \hat{\sigma^2_\epsilon}_{MME} &= \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 \hat{\beta}_{MME}^2\\
     \end{split}
 \end{equation}
 
