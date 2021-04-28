@@ -40,7 +40,7 @@ as the light-tailedness of the normal distribution essentially implies that we a
 To make the situation more complicated, in practice non-normality in errors may happen in both the residual $\epsilon$ and the observation matter $u$.
 Thus, there is a need to investigate the impacts of non-normality on the \textit{errors-in-variables model}. 
 
-In this project, we investigate how the non-normality of errors in both the explanatory variable $x$ and the residual of the dependent variable $y$ affects the estimation of the regression coefficient $\hat{beta}$ and the estimation of variance of error $\sigma^2_\epsilon$.
+In this project, we investigate how the non-normality of errors in both the explanatory variable $x$ and the residual of the dependent variable $y$ affects the estimation of the regression coefficient $\hat{\beta}$ and the estimation of variance of error $\sigma^2_\epsilon$.
 We first perform a literature review on existing results on the \textit{errors-in-variables model}.
 Then we will describe in detail the methodology computer simulation technique to produce results.
 Finally, we will present the results and findings from the computer simulations.
@@ -475,7 +475,7 @@ These differences are tabulated in Tables \ref{Tab:MBE_diff_t_normal} and \ref{T
 \end{table}
 
 It should be noted that when the variance of a Student's $t$ distribution is low, the number of degrees of freedom of the distribution is high. 
-From elementary statiscal theory we know that as the number of degrees of freedom of a Student's $t$ distribution increases, it converges to the normal distribution.
+From elementary statistical theory we know that as the number of degrees of freedom of a Student's $t$ distribution increases, it converges to the normal distribution.
 Thus, for some low fixed variance, we should expect similar findings from a Student's $t$ distribution and normal distribution with that variance.
 
 We first focus on the comparisons in MBE.
@@ -595,7 +595,7 @@ These differences are tabulated in Tables \ref{Tab:MBE_diff_chi_normal} and \ref
     \end{tabular}
 \end{table}
 
-When comparing findings from $\chi^2$-distributed errors and normal-distributed errors, it should be noted that the $\chi^2$ distribution recentered at mean zero converges to a normal distribution with the same variance as the number of degrees of freedom is large.
+When comparing findings from $\chi^2$-distributed errors and normal-distributed errors, it should be noted that the $\chi^2$ distribution re-centered at mean zero converges to a normal distribution with the same variance as the number of degrees of freedom is large.
 
 For the MBE, there seems to be no clear comparison between the normal-distributed and $\chi^2$-distributed cases,
 because the sign of the difference fluctuates in $\hat{\beta}_{OLS}$, $\hat{\beta}_{MME}$ and different $\sigma^2_u$.
@@ -810,7 +810,7 @@ The difference for $\hat{\sigma^2_\epsilon}_{MME}$ is greater than that of $\hat
 
 \subsubsection{$\chi^2$-distributed observation error}
 
-Lastly, we perform the simulations on estimating $\sigma^2_\epsilon$ under recentered $\chi^2$ errors.
+Lastly, we perform the simulations on estimating $\sigma^2_\epsilon$ under re-centered $\chi^2$ errors.
 The estimation MBE and MSE are summarized in Tables \ref{Tab:MBE_sigma_chi} and \ref{Tab:MSE_sigma_chi} respectively.
 
 \begin{table}[ht]
@@ -918,12 +918,12 @@ This difference is increasing in $\sigma^2_u$, and the difference when using $\h
 
 \section{Conclusion}
 
-We have presented some epirical results on the case of non-normality under the errors-in-variables model,
+We have presented some empirical results on the case of non-normality under the errors-in-variables model,
 and have shown how non-normality in the observation error affects the estimation of the regression parameters $\beta$ and $\sigma^2_\epsilon$. 
 We have compared the errors in different metrics when using different distributions and different estimators $\hat{\beta}$ and $\hat{\sigma^2_\epsilon}$.
 
 Future work can be extended upon this topic.
-We have only presented the epirical results arising from problem of estimation,
+We have only presented the empirical results arising from problem of estimation,
 and the problem of inference of statistical parameters has not been explored in this work.
 Exact inference of statistical parameters under non-normality can also be explored.
 The effects of non-normality on multivariate errors-in-variables models and other estimators can also be explored in the future.
@@ -931,7 +931,7 @@ The effects of non-normality on multivariate errors-in-variables models and othe
 \section{Acknowledgments}
 
 I would like to thank Dr. Raymond W.L. WONG for his support and guidance for this directed studies.
-I would also like to thank the HKU Department of Statistics and Actuarial Science for providing me with this opportunity to pursure in this directed studies capstone project.
+I would also like to thank the HKU Department of Statistics and Actuarial Science for providing me with this opportunity to pursue in this directed studies capstone project.
 
 \section{Appendix}
 
