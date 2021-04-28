@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage[ruled,vlined]{algorithm2e}
 \usepackage{listings}
-\usepackage[margin=1.0in]{geometry}
+%\usepackage[margin=1.0in]{geometry}
 \setlength{\parskip}{1em}
 \renewcommand{\algorithmcfname}{Procedure}
 \title{Investigation of Non-normality in a Simple Errors-in-variables Model}
@@ -765,7 +765,7 @@ The differences are tabulated in Tables \ref{Tab:MBE_sigma_diff_t} and \ref{Tab:
 
 \begin{table}[ht]
     \centering
-    \caption{Difference between $\chi^2$-distributed error case and normal-distributed error case: Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
+    \caption{Difference between Student's $t$-distributed error case and normal-distributed error case: Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
     \label{Tab:MSE_sigma_diff_t}
     \begin{tabular}[t]{lcccccc}
         \hline
@@ -789,11 +789,112 @@ For MBE, we observe that the differences for both $\hat{\sigma^2_\epsilon}_{OLS}
 As the MBE for $\hat{\sigma^2_\epsilon}_{OLS}$ is positive for both normal errors and Student's $t$ errors, this means that the MBE for $\hat{\sigma^2_\epsilon}_{OLS}$ is closer to zero for Student's $t$ errors.
 However, for $\hat{\sigma^2_\epsilon}_{MME}$, as the MBE is negative for both types of errors, this means that $\hat{\sigma^2_\epsilon}_{MME}$ has a mean bias further away from zero under Student's $t$ errors.
 
-For MSE, we observe that the difference is positive and increasing in $\sigma^2_u$. The difference for $\hat{\sigma^2_\epsilon}_{MME}$ is greater than that of $\hat{\sigma^2_\epsilon}_{OLS}$ for the same values of $\sigma^2_u$ and $\sigma^2_\epsilon$.
+For MSE, we observe that the difference is positive and increasing in $\sigma^2_u$.
+The difference for $\hat{\sigma^2_\epsilon}_{MME}$ is greater than that of $\hat{\sigma^2_\epsilon}_{OLS}$ for the same values of $\sigma^2_u$ and $\sigma^2_\epsilon$.
 
 \subsubsection{$\chi^2$-distributed observation error}
 
+Lastly, we perform the simulations on estimating $\sigma^2_\epsilon$ under recentered $\chi^2$ errors.
+The estimation MBE and MSE are summarized in Tables \ref{Tab:MBE_sigma_chi} and \ref{Tab:MSE_sigma_chi} respectively.
 
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under $\chi^2$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MBE_sigma_chi}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&5.846227&-0.107955&5.852595&-0.097985&5.956031&0.001673\\
+        $\sigma^2_u = 2.0$&7.916757&0.010683&7.853233&-0.059238&7.983631&0.070941\\
+        $\sigma^2_u = 2.5$&9.848993&-0.016529&9.828657&-0.039154&9.799226&-0.076836\\
+        $\sigma^2_u = 3.0$&11.705806&-0.108001&11.658828&-0.148038&11.752845&-0.055206\\
+        $\sigma^2_u = 4.5$&17.374873&-0.210306&17.373310&-0.183002&17.402963&-0.193137\\
+        $\sigma^2_u = 6.0$&22.814673&-0.435660&22.796974&-0.457350&23.039812&-0.174432\\
+        $\sigma^2_u = 8.0$&30.256286&-0.377694&30.314447&-0.328371&30.343469&-0.340969\\
+        $\sigma^2_u = 10.0$&37.120092&-0.841162&37.539161&-0.432518&37.117431&-0.840077\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MSE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under $\chi^2$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_sigma_chi}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&56.563197&22.996346&57.309948&23.677762&60.483599&25.715861\\
+        $\sigma^2_u = 2.0$&93.680355&32.217787&91.819179&31.360443&98.074845&35.627879\\
+        $\sigma^2_u = 2.5$&137.435981&42.521144&137.176570&42.563518&136.832234&42.626278\\
+        $\sigma^2_u = 3.0$&184.303172&50.044663&183.957501&50.917001&188.524146&53.241392\\
+        $\sigma^2_u = 4.5$&377.787401&82.590910&379.565750&84.655555&381.000349&84.963603\\
+        $\sigma^2_u = 6.0$&625.109020&116.664481&623.575613&117.049269&640.975827&123.237757\\
+        $\sigma^2_u = 8.0$&1067.198766&175.652108&1074.095498&179.207401&1072.267645&174.251989\\
+        $\sigma^2_u = 10.0$&1571.092644&232.458616&1612.083101&239.745418&1581.926597&242.492254\\ 
+        \hline
+    \end{tabular}
+\end{table}
+
+We again observe similar properties to the normal and Student's $t$ cases:
+For MBE, the MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ is positive and increasing in $\sigma^2_u$,
+and that of $\hat{\sigma^2_\epsilon}_{MME}$ is negative and decreasing in $\sigma^2_u$. 
+For MSE, the MSE of both $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ are both increasing in $\sigma^2_u$, and the MSE of $\hat{\sigma^2_\epsilon}_{MME}$ is smaller than that of $\hat{\sigma^2_\epsilon}_{OLS}$. 
+
+The MBE and MSE results after taking difference with the normal case are shown in Tables \ref{Tab:MBE_sigma_diff_chi} and \ref{Tab:MSE_sigma_diff_chi} respectively. 
+
+\begin{table}[ht]
+    \centering
+    \caption{Difference between $\chi^2$-distributed error case and normal-distributed error case: Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
+    \label{Tab:MBE_sigma_diff_chi}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&-0.121868&-0.126673&-0.095868&-0.097683&0.034691&0.032430\\
+        $\sigma^2_u = 2.0$&-0.000769&-0.000073&-0.003602&-0.007841&0.046975&0.040955\\
+        $\sigma^2_u = 2.5$&0.015169&0.013430&-0.029604&-0.039207&-0.047118&-0.059946\\
+        $\sigma^2_u = 3.0$&-0.089071&-0.102870&-0.124525&-0.129951&-0.025971&-0.028909\\
+        $\sigma^2_u = 4.5$&-0.183899&-0.197984&-0.127204&-0.129226&-0.057467&-0.091276\\
+        $\sigma^2_u = 6.0$&-0.303190&-0.318269&-0.285091&-0.299563&0.016387&-0.011594\\
+        $\sigma^2_u = 8.0$&-0.189109&-0.164376&-0.035383&-0.025541&0.085655&-0.003566\\
+        $\sigma^2_u = 10.0$&-0.359106&-0.367568&-0.118853&-0.208896&-0.344515&-0.423934\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Difference between $\chi^2$-distributed error case and normal-distributed error case: Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under different $\sigma^2_u$ and $\sigma^2_\epsilon$.}
+    \label{Tab:MSE_sigma_diff_chi}
+    \begin{tabular}[t]{lcccccc}
+        \hline
+        &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
+        \hline
+        &$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$&$\hat{\beta}_{OLS}$&$\hat{\beta}_{MME}$\\
+        \hline
+        $\sigma^2_u = 1.5$&17.123633&19.105339&17.503852&19.194230&20.608246&20.832436\\
+        $\sigma^2_u = 2.0$&24.857297&25.933181&23.392068&24.529332&27.502203&27.901681\\
+        $\sigma^2_u = 2.5$&31.597691&33.130699&30.194104&32.498510&29.345670&31.759968\\
+        $\sigma^2_u = 3.0$&32.975182&37.525819&32.044992&37.391702&35.729896&38.775078\\
+        $\sigma^2_u = 4.5$&44.576956&56.048866&47.821178&57.611808&49.167870&56.316500\\
+        $\sigma^2_u = 6.0$&48.857455&71.243179&46.908839&70.395988&65.226202&74.410970\\
+        $\sigma^2_u = 8.0$&70.609430&98.734220&80.935690&98.421423&83.344002&92.865456\\
+        $\sigma^2_u = 10.0$&61.902354&114.062432&85.163824&116.435787&68.716872&116.415571\\
+        \hline
+    \end{tabular}
+\end{table}
+
+For the difference in MBE between the $\chi^2$-distributed and normal-distributed cases, we do not see a clear monotonic trend in the difference value, and the sign fluctuates. 
+For the difference in MSE, we observe that the difference is always positive, meaning that the MSE under $\chi^2$-distributed errors is greater than that under normal-distributed errors.
+This difference is increasing in $\sigma^2_u$, and the difference when using $\hat{\sigma^2_\epsilon}_{MME}$ is greater than that for $\hat{\sigma^2_\epsilon}_{OLS}$.
 
 \section{Conclusion}
 
