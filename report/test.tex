@@ -23,7 +23,7 @@ STAT3799 Directed studies in statistics}
 In a classical linear regression setting, we often assume that the explanatory variable is nonrandom without any observation error, and that the errors are normally distributed.
 However, this may not be the case in real-life applications, where observation errors may exist, and the errors may be heavy-tailed or skewed.
 We use the computer simulation technique to demonstrate the impacts of non-normality in the \textit{errors-in-variables} model.
-We present empirical results from simulations based on normal, Student's $t$ and $\chi^2$ distributions on the ordinary least squares and method of moments estimation of regression parameters $\beta$ and $\sigma^2_\epsilon$.
+We present empirical results from simulations based on normal, Student's $t$ and $\chi^2$ distributions on the ordinary least squares and method of moments estimation of regression slope parameter $\beta$ and residual variance $\sigma^2_\epsilon$.
 
 \end{abstract}
 
@@ -136,7 +136,7 @@ To find out what happens to $\hat{\sigma^2_\epsilon}$, we can first look at what
 
 Thus, we can see that the true error term is obfuscated by two additional sources of error. 
 
-We can further obtain the limit of the OLS estimated variance, as we assumed earlier that $\epsilon$, $x$ and $u$ are uncorrelated:
+We can further obtain the limit of the OLS variance estimator, as we assumed earlier that $\epsilon$, $x$ and $u$ are uncorrelated:
 
 \begin{equation}
     \textrm{plim } \hat{\sigma^2_\epsilon} = \sigma_\epsilon^2 + (1-\lambda)^2 \beta^2 \sigma_x^2 + \lambda^2 \beta^2 \sigma_u^2   
@@ -304,7 +304,7 @@ This is mostly because the bias is centered at zero, leading to the signs of bia
 
 Table \ref{Tab:MSE_absence} summarizes the MSE of $\beta$ when $\sigma^2_u=0$ for different error distributions.
 There is a clear trend of increasing of the MSE for each of the distributions as $\sigma^2_\epsilon$ increases. 
-Furthermore, we can observe that the MSE for $\chi^2$ distribution is the least in all 3 experiments, and the MSE for Student's $t$ distribution is the greatest in 2 out of 3 experiments.
+We can also observe that the MSE for $\chi^2$ distribution is the least in all 3 experiments, and the MSE for Student's $t$ distribution is the greatest in 2 out of 3 experiments.
 
 \subsubsection{Normal-distributed observation error and normal-distributed residual error}
 
@@ -315,7 +315,7 @@ Table \ref{Tab:MBE_normal} and Table \ref{Tab:MSE_normal} summarize the simulate
 
 \begin{table}[ht]
     \centering
-    \caption{Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$, and under normal-distributed residual error with different variances $\sigma^2_\epsilon$.}
+    \caption{Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
     \label{Tab:MBE_normal}
     \begin{tabular}[t]{lcccccc}
         \hline
@@ -337,7 +337,7 @@ Table \ref{Tab:MBE_normal} and Table \ref{Tab:MSE_normal} summarize the simulate
 
 \begin{table}[ht]
     \centering
-    \caption{Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$, and under normal-distributed residual error with different variances $\sigma^2_\epsilon$.}
+    \caption{Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
     \label{Tab:MSE_normal}
     \begin{tabular}[t]{lcccccc}
         \hline
@@ -370,13 +370,13 @@ Third, we observe that the MSE of $\hat{\beta}_{OLS}$ increases as $\sigma^2_u$ 
 Now, we turn our attention to the observations of the MBE and MSE of $\hat{\beta}_{MME}$, and compare them with $\hat{\beta}_{OLS}$.
 Firstly, we observe that the absolute value of MBE and MSE of $\hat{\beta}_{MME}$ are both lower than that of $\hat{\beta}_{OLS}$ at the same $\sigma^2_u$ and $\sigma^2_\epsilon$.
 This is expected because $\hat{\beta}_{MME}$ is a consistent estimator of $\beta$ while $\hat{\beta}_{OLS}$ is not.
-Second, we observe that the MBE of $\hat{\beta}_{MME}$ (roughly) increases as $\sigma^2_u$ increases.
+Second, we observe that the MBE of $\hat{\beta}_{MME}$ is positive and in general increases as $\sigma^2_u$ increases.
 Third, we observe that the MSE of $\hat{\beta}_{MME}$ increases as $\sigma^2_u$ increases. This is similar to the case of $\hat{\beta}_{OLS}$.
 
 \subsubsection{Student's $t$-distributed observation error and Student's $t$-distributed residual error}
 
 We perform the similar simulations for Student's $t$ distributed observation error and residual error for different variances.
-Elementary statistical theory tells us that the variance for a Student's $t$ distribution with $\nu > 0$ degrees of freedom has variance equal to $\frac{\nu}{\nu-2}$.
+Elementary statistical theory tells us that the variance for a Student's $t$ distribution with $\nu > 2$ degrees of freedom has variance equal to $\frac{\nu}{\nu-2}$.
 Taking inverse of the equation $\sigma^2 = \frac{\nu}{\nu-2}$ gives $\nu = 2 \cdot \frac{\sigma^2}{\sigma^2-1}$.
 Note that the range of $\sigma^2_u$ and $\sigma^2_\epsilon$ are specially chosen such that $\nu > 2$ because the Student's $t$ distribution only has finite variance when $\nu > 2$.
 Thus, in the tables shown below, when we write $\sigma^2 = \delta$, it means the simulation trial was performed using the Student's $t$ distribution with $2 \cdot \frac{\delta}{\delta-1}$ degrees of freedom.
@@ -385,7 +385,7 @@ Table \ref{Tab:MBE_t} and Table \ref{Tab:MSE_t} summarize the simulated MBE and 
 
 \begin{table}[ht]
     \centering
-    \caption{Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under Student's $t$-distributed observation error with different variances $\sigma^2_u$, and under Student's $t$-distributed residual error with different variances $\sigma^2_\epsilon$.}
+    \caption{Estimation MBE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under Student's $t$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
     \label{Tab:MBE_t}
     \begin{tabular}[t]{lcccccc}
         \hline
@@ -407,7 +407,7 @@ Table \ref{Tab:MBE_t} and Table \ref{Tab:MSE_t} summarize the simulated MBE and 
 
 \begin{table}[ht]
     \centering
-    \caption{Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under Student's $t$-distributed observation error with different variances $\sigma^2_u$, and under Student's $t$-distributed residual error with different variances $\sigma^2_\epsilon$.}
+    \caption{Estimation MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ under Student's $t$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
     \label{Tab:MSE_t}
     \begin{tabular}[t]{lcccccc}
         \hline
@@ -433,9 +433,9 @@ Firstly, similar to the normal-distributed errors case, we observe that the MBE 
 and that the MBE of $\hat{\beta}_{MME}$ is positive and increasing in $\sigma^2_u$.
 The MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ are both increasing in $\sigma^2_u$.
 
-However, when comparing $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$,
-we find that switching from $\hat{\beta}_{OLS}$ to $\hat{\beta}_{MME}$ does not provide that much of a decrease in absolute MBE or MSE
-compared to the normal-distributed errors case.
+When comparing $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$,
+we find that switching from $\hat{\beta}_{OLS}$ to $\hat{\beta}_{MME}$ sitll provides a decrease in absolute MBE or MSE,
+but the decrease is not that large when compared to the normal-distributed errors case.
 This situation is much more apparent in large values of $\sigma^2_u$.
 For MBE, when $\sigma^2_u = 10.0$, we observe that the absolute value of the MBE of $\hat{\beta}_{MME}$ is in fact greater than that of $\hat{\beta}_{OLS}$.
 Similarly for MSE, when $\sigma^2_u \in \{8.0, 10.0\}$, we observe that the MSE of $\hat{\beta}_{MME}$ is greater than that of $\hat{\beta}_{OLS}$.
@@ -497,13 +497,15 @@ From elementary statistical theory we know that as the number of degrees of free
 Thus, for some low fixed variance, we should expect similar results from a Student's $t$ distribution and normal distribution with that variance.
 
 We first focus on the comparisons in MBE.
-For $\hat{\beta}_{OLS}$, we observe that the difference is first close to zero, then increases to a certain point (around at $\sigma^2_u = 4.5$), then again starts to decrease.
-As the bias of $\hat{\beta}_{OLS}$ is negative in both Student's $t$-distributed errors and normal-distributed errors, this shows that $\hat{\beta}_{OLS}$ under Student's $t$ errors is biased downwards less.
-On the other hand, for $\hat{\beta}_{MME}$, we observe that the difference is increasing throughout as $\sigma^2_u$ is increased. 
+For $\hat{\beta}_{OLS}$, we observe that the difference is first close to zero, then becomes positive and increases to a certain point (around at $\sigma^2_u = 4.5$), then again starts to decrease.
+As the bias of $\hat{\beta}_{OLS}$ is negative in both Student's $t$-distributed errors and normal-distributed errors,
+when the difference in MBE is positive, it means that $\hat{\beta}_{OLS}$ under Student's $t$ errors is closer to zero.
+On the other hand, for $\hat{\beta}_{MME}$, we observe that the difference is positive and increasing throughout as $\sigma^2_u$ is increased.
+As the MBE for $\hat{\beta}_{MME}$ is positive in both Student's $t$ errors and normal errors, this means that the bias for $\hat{\beta}_{MME}$ under Student's $t$ errors is greater and further away from zero.
 
 We then focus on the comparisons in MSE.
-Although the trends for small $\sigma^2_u$ is not clear, for both $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$
-we observe that the MSE under Student's $t$-distributed errors is in general greater than that under normal-distributed errors,
+For both $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$, we observe that the difference is mostly positive,
+meaning that the MSE under Student's $t$-distributed errors is in general greater than that under normal-distributed errors,
 and that this difference is in general increasing in $\sigma^2_u$.
 
 \subsubsection{$\chi^2$-distributed observation error}
@@ -562,7 +564,8 @@ Table \ref{Tab:MBE_chi} and Table \ref{Tab:MSE_chi} summarize the simulated MBE 
 For the MBE and MSE, we have similar observations to the normal-distributed errors and Student's $t$-distributed errors cases,
 where the MBE of $\hat{\beta}_{OLS}$ is negative and decreasing in $\sigma^2_u$, 
 and the MBE of $\hat{\beta}_{MME}$ is positive and increasing in $\sigma^2_u$.
-Similar to before, the MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ are both increasing in $\sigma^2_u$.
+Similar to before, the MSE of $\hat{\beta}_{OLS}$ and $\hat{\beta}_{MME}$ are both increasing in $\sigma^2_u$,
+and the MSE for $\hat{\beta}_{MME}$ is smaller than that for $\hat{\beta}_{OLS}$.
 
 To compare findings between the normal-distributed errors and $\chi^2$-distributed errors case,
 we again take the cell difference from the two distributions in their MBE and MSE respectively.
@@ -613,7 +616,8 @@ These differences are tabulated in Tables \ref{Tab:MBE_diff_chi_normal} and \ref
     \end{tabular}
 \end{table}
 
-When comparing findings from $\chi^2$-distributed errors and normal-distributed errors, it should be noted that the $\chi^2$ distribution re-centered at mean zero converges to a normal distribution with the same variance as the number of degrees of freedom is large.
+When comparing findings from $\chi^2$-distributed errors and normal-distributed errors, it should be again noted that
+the $\chi^2$ distribution re-centered at mean zero converges to a normal distribution with the same variance when the number of degrees of freedom is large.
 
 For the MBE, there seems to be no clear comparison between the normal-distributed and $\chi^2$-distributed cases,
 because the sign of the difference fluctuates in $\hat{\beta}_{OLS}$, $\hat{\beta}_{MME}$ and different $\sigma^2_u$.
@@ -634,7 +638,8 @@ We use the following estimators of $\sigma^2_\epsilon$ and apply them to the gen
 
 \subsubsection{Absence of observation error}
 
-Under the absence of observation error, the OLS and MME estimators of $\sigma^2_\epsilon$ are the same.
+Under the absence of observation error, the OLS and MME estimators of $\sigma^2_\epsilon$ are the same. 
+Tables \ref{Tab:MBE_sigma_absence} and \ref{Tab:MSE_sigma_absence} summarize respectively the MBE and MSE of $\sigma^2_\epsilon$ when $\sigma^2_u=0$ for different error distributions.
 
 \begin{table}[ht]
     \centering
@@ -651,10 +656,23 @@ Under the absence of observation error, the OLS and MME estimators of $\sigma^2_
     \end{tabular}
 \end{table}
 
-Table \ref{Tab:MBE_sigma_absence} summarizes the MBE of $\sigma^2_\epsilon$ when $\sigma^2_u=0$ for different error distributions.
-Similar to the case of $\hat{\beta}$, there seems to be no clear monotonic trend of the MBE from the simulations performed under different distributions. 
+\begin{table}[ht]
+    \centering
+    \caption{Estimation MSE of $\sigma^2_\epsilon$ when $\sigma^2_u=0$, under different distributions and variance of $\epsilon$.}
+    \label{Tab:MSE_sigma_absence}
+    \begin{tabular}[t]{lccc}
+        \hline
+        &Normal&Student's $t$&$\chi^2$\\
+        \hline
+        $\sigma^2_\epsilon = 1.5$&0.154338&0.367452&1.325430\\
+        $\sigma^2_\epsilon = 2.0$&0.278130&1.806585&1.919026\\
+        $\sigma^2_\epsilon = 2.5$&0.437989&10.128111&2.414450\\
+        \hline
+    \end{tabular}
+\end{table}
 
-TODO: MSE
+For MBE, similar to the case of $\hat{\beta}$, there seems to be no clear monotonic trend of the MBE from the simulations performed under different distributions. 
+For MSE, we can observe that the MSE for normal-errors is the least out of the distributions in concern.
 
 \subsubsection{Normal-distributed observation error}
 
@@ -687,7 +705,7 @@ The simulated MBE and MSE are tabulated in Tables \ref{Tab:MBE_sigma_normal} and
 \begin{table}[ht]
     \centering
     \caption{Estimation MSE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
-    \label{Tab:MSE_sigma_t}
+    \label{Tab:MSE_sigma_normal}
     \begin{tabular}[t]{lcccccc}
         \hline
         &\multicolumn{2}{c}{$\sigma^2_\epsilon=1.5$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.0$}&\multicolumn{2}{c}{$\sigma^2_\epsilon=2.5$}\\
@@ -721,7 +739,7 @@ The MBE and MSE results are tabulated in Tables \ref{Tab:MBE_sigma_t} and \ref{T
 
 \begin{table}[ht]
     \centering
-    \caption{Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \caption{Estimation MBE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under Student's $t$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
     \label{Tab:MBE_sigma_t}
     \begin{tabular}[t]{lcccccc}
         \hline
@@ -744,7 +762,7 @@ The MBE and MSE results are tabulated in Tables \ref{Tab:MBE_sigma_t} and \ref{T
 
 \begin{table}[ht]
     \centering
-    \caption{Estimation MSE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under normal-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
+    \caption{Estimation MSE of $\hat{\sigma^2_\epsilon}_{OLS}$ and $\hat{\sigma^2_\epsilon}_{MME}$ under Student's $t$-distributed observation error with different variances $\sigma^2_u$ and residual error with different variances $\sigma^2_\epsilon$.}
     \label{Tab:MSE_sigma_t}
     \begin{tabular}[t]{lcccccc}
         \hline
@@ -766,8 +784,8 @@ The MBE and MSE results are tabulated in Tables \ref{Tab:MBE_sigma_t} and \ref{T
 \end{table}
 
 We find that the observations are similar to the case of estimating $\beta$ under Student's $t$-distributed errors: 
-We find that the estimation accuracy when using $\hat{\sigma^2_\epsilon}_{MME}$ instead of using $\hat{\sigma^2_\epsilon}_{OLS}$ is not as great as compared to the normal case.
-Similar to the case of estimating $\beta$, we also find that when $\sigma^2_u$ increases, the improvement of using $\hat{\sigma^2_\epsilon}_{MME}$ instead of $\hat{\sigma^2_\epsilon}_{OLS}$ decreases.
+We find that the improvement in estimation accuracy when using $\hat{\sigma^2_\epsilon}_{MME}$ instead of using $\hat{\sigma^2_\epsilon}_{OLS}$ is not as great as compared to the normal case.
+Similar to the case of estimating $\beta$, we also find that when $\sigma^2_u$ increases, the improvement of using $\hat{\sigma^2_\epsilon}_{MME}$ to replace $\hat{\sigma^2_\epsilon}_{OLS}$ decreases.
 In fact, we see that when $\sigma^2_u = 10.0$, the MSE of $\hat{\sigma^2_\epsilon}_{MME}$ is greater than that of $\hat{\sigma^2_\epsilon}_{OLS}$. 
 
 To compare the findings between normal-distributed errors and Student's $t$ distributed errors, we take differences in a fashion similar to the previous sections.
@@ -938,7 +956,7 @@ This difference is increasing in $\sigma^2_u$, and the difference when using $\h
 
 We have presented some empirical results on the case of non-normality under the errors-in-variables model,
 and have shown how non-normality in the observation error affects the estimation of the regression parameters $\beta$ and $\sigma^2_\epsilon$. 
-We have compared the errors in different metrics when using different distributions and different estimators $\hat{\beta}$ and $\hat{\sigma^2_\epsilon}$.
+We have compared the errors in different metrics when using different distributions and different estimators for $\hat{\beta}$ and $\hat{\sigma^2_\epsilon}$.
 
 Future work can be extended upon this topic.
 We have only presented the empirical results arising from problem of estimation,
@@ -960,15 +978,10 @@ The computer code used in this project can be found at \url{https://github.com/j
 \begin{thebibliography}{9}
 
 \bibitem{lecturenotes}
-    Steve Pischke.
-    \textit{Lecture Notes on Measurement Error}.
-    2007.
+    Pischke S. Lecture Notes on Measurement Error. 2007.
 
 \bibitem{mmereport}
-    Jonathan Gillard.
-    \textit{Method of Moments Estimation in Linear Regression with Errors in both Variables}.
-    2014.
-
+    Gillard J. Method of Moments Estimation in Linear Regression with Errors in both Variables. Communications in Statistics - Theory and Methods. 2014;43(15):3208–22.
 \end{thebibliography}
 
 \end{document}
