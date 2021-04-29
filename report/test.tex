@@ -23,7 +23,7 @@ STAT3799 Directed studies in statistics}
 In a classical linear regression setting, we often assume that the explanatory variable is nonrandom without any observation error, and that the errors are normally distributed.
 However, this may not be the case in real-life applications, where observation errors may exist, and the errors may be heavy-tailed or skewed.
 We use the computer simulation technique to demonstrate the impacts of non-normality in the \textit{errors-in-variables} model.
-We present empirical results from simulations based on normal, Student's $t$ and $\chi^2$ distributions on the estimation of regression parameters $\beta$ and $\sigma^2_\epsilon$.
+We present empirical results from simulations based on normal, Student's $t$ and $\chi^2$ distributions on the ordinary least squares and method of moments estimation of regression parameters $\beta$ and $\sigma^2_\epsilon$.
 
 \end{abstract}
 
@@ -49,11 +49,11 @@ as the light-tailedness of the normal distribution essentially implies that we a
 To make the situation more complicated, in practice non-normality in errors may happen in both the residual $\epsilon$ and the observation matter $u$.
 Thus, there is a need to investigate the impacts of non-normality on the \textit{errors-in-variables model}. 
 
-In this project, we investigate how the non-normality of errors in both the explanatory variable $x$ and the residual of the dependent variable $y$ affects the estimation of the regression coefficient $\hat{\beta}$ and the estimation of variance of error $\sigma^2_\epsilon$.
+In this work, we investigate how the non-normality of errors in both the explanatory variable $x$ and the residual of the dependent variable $y$ affects the estimation of the regression coefficient $\hat{\beta}$ and the estimation of variance of error $\sigma^2_\epsilon$.
 We first perform a literature review on existing results on the \textit{errors-in-variables model}.
-Then we will describe in detail the methodology computer simulation technique to produce results.
-Finally, we will present the results and findings from the computer simulations.
-The code used in this project can be found in the appendix.
+Then we will describe in detail the methodology, which is the computer simulation technique used to produce results.
+Finally, we will present the results and findings from the computer simulation experiments.
+The code used in this work can be found in the appendix.
 
 \section{Literature review}
 
@@ -64,42 +64,43 @@ Suppose we wish to estimate the relationship $y = \beta x + \epsilon$, but we on
 If we substitute $\tilde{x} = x+u$ into $y = \beta x + \epsilon$, we obtain:
 
 \begin{equation}
-    y_i = \beta(\tilde{x}_i - u_i) + \epsilon_i = \beta \tilde{x} + (\epsilon - \beta u)
+    y = \beta(\tilde{x} - u) + \epsilon = \beta \tilde{x} + (\epsilon - \beta u)
 \end{equation}
 
 As the measurement error in $x$ becomes part of the residual error term in the model, the exogeneity assumption of the Gauss-Markov theorem is violated as $cov(u, \tilde{x}) \neq 0$.
-Thus, the ordinary least-squares (OLS) estimator of $\beta$ may not be the \textit{best linear unbiased estimator}.
+Thus, the ordinary least-squares (OLS) estimator of $\beta$ may not be the \textit{best linear unbiased estimator} (BLUE).
 Unlike the case of with measurement error, the OLS and MME estimators are different.
 In fact, We will see that the OLS estimators of $\beta$ and $\sigma_\epsilon^2$ are biased. 
-n order to obtain unbiased and consistent estimates, we would have to resort to the method of moments (MME) estimators instead. 
+In order to obtain unbiased and consistent estimates, we would have to resort to the method of moments (MME) estimators instead. 
+Furthermore, although the OLS estimator is the same as the maximum likelihood estimator under normal-distributed errors, this may not be the case under non-normal errors. 
 
 \subsection{OLS and MME for $\beta$}
 
 Suppose we use the ordinary least-squares (OLS) estimator for $\beta$:
 
 \begin{equation}
-\hat{\beta} = \frac{cov(\tilde{x, y})}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}
+    \hat{\beta}_{OLS} = \frac{cov(\tilde{x}, y)}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}
 \end{equation}
 
-Because $\epsilon$, $u$ and $x$ are independent to each other, we can obtain
+Because $\epsilon$, $u$ and $x$ are independent to each other, we can obtain the limit of $\hat{beta}_{OLS}$
 
 \begin{equation}
-\textrm{plim } \hat{\beta} = \frac{\beta \sigma^2_x}{\sigma^2_x + \sigma^2_u} = \lambda \beta
+    \textrm{plim } \hat{\beta}_{OLS} = \frac{\beta \sigma^2_x}{\sigma^2_x + \sigma^2_u} = \lambda \beta
 \end{equation}
 
 where
 
 \begin{equation}
-\lambda \equiv \frac{\sigma_x^2}{\sigma_x^2 + \sigma_u^2}
+    \lambda \equiv \frac{\sigma_x^2}{\sigma_x^2 + \sigma_u^2}
 \end{equation}
 
-This $\lambda$ is also called the reliability or signal-to-variance ratio.
+This $\lambda$ is also called the reliability ratio or signal-to-variance ratio.
 
 Therefore, we can see that the OLS estimator $\hat{\beta}$ is biased towards zero because $0 < \lambda < 1$. The sign of the bias depends on the sign of the true $\beta$.
 
 In order to obtain consistent estimates for $\beta$, we can use the MME estimator instead.
 Suppose we have some prior knowledge on the measurement errors and have obtained the value of $\sigma_x^2$, $\sigma_u^2$ or $\lambda$.
-Then we can apply the appropriate adjustment for the bias in the OLS $\hat{\beta}$ as $\sigma^2_{\tilde{x}} = \sigma^2_x + \sigma^2_u$, and $\sigma^2_{\tilde{x}}$ can be directly measured from the observed data. 
+Then we can apply the appropriate adjustment for the bias in the OLS $\hat{\beta}$ as $\sigma^2_{\tilde{x}} = \sigma^2_x + \sigma^2_u$, as we have can estimate $\sigma^2_{\tilde{x}}$ using $var(\tilde{x})$, which can be measured directly from the observation data. 
 
 Some MME estimators for $\beta$ using the first and second moments alone are shown below:
 
@@ -121,7 +122,7 @@ There are practical methods available to obtain information on the measurement e
 
 \subsection{OLS and MME for $\sigma_\epsilon^2$}
 
-The usual way in OLS to estimate $\sigma_\epsilon^2$ is to calculate $\hat{\sigma^2_\epsilon}$ as the sum of squares of the residuals divided by the degrees of freedom $n-d$.
+The usual way in OLS to estimate $\sigma_\epsilon^2$ is to calculate $\hat{\sigma^2_\epsilon}$ as the sum of squares of the residuals divided by the degrees of freedom $n-1$.
 To find out what happens to $\hat{\sigma^2_\epsilon}$, we can first look at what happens to the estimated residual variance first \cite{lecturenotes}:
 
 \begin{equation}
@@ -135,14 +136,14 @@ To find out what happens to $\hat{\sigma^2_\epsilon}$, we can first look at what
 
 Thus, we can see that the true error term is obfuscated by two additional sources of error. 
 
-We can further obtain the OLS estimated variance as we assumed earlier that $\epsilon$, $x$ and $u$ are uncorrelated:
+We can further obtain the limit of the OLS estimated variance, as we assumed earlier that $\epsilon$, $x$ and $u$ are uncorrelated:
 
 \begin{equation}
     \textrm{plim } \hat{\sigma^2_\epsilon} = \sigma_\epsilon^2 + (1-\lambda)^2 \beta^2 \sigma_x^2 + \lambda^2 \beta^2 \sigma_u^2   
 \end{equation}
 
 In order to obtain the MME estimator for $\sigma^2_\epsilon$, similar to the case for $\hat{\beta}_{MME}$, if we have some prior knowledge on the observation error, we can obtain consistent estimates for $\sigma_x^2$, $\sigma_u$, $\lambda$ and $\beta$.
-Thus, rearranging the expression for $\hat{\sigma^2_\epsilon}$ gives:
+Thus, by rearranging the expression for $\hat{\sigma^2_\epsilon}$, we have:
 
 \begin{equation}
     \label{eq:sigma_MME}
@@ -150,7 +151,7 @@ Thus, rearranging the expression for $\hat{\sigma^2_\epsilon}$ gives:
 \end{equation}
 
 Based on the relation $\tilde{x_i} = x_i + u_i$, we can obtain $var(x) = var(\tilde{x}) - var(u)$.
-Thus, if $\sigma^2_u$ is known, and we use $var(x)$ as an estimator for $\sigma^2_x$, we can substitute into \ref{eq:sigma_MME}:
+Thus, if $\sigma^2_u$ is known, and we use $var(x)$ as an estimator for $\sigma^2_x$, we can substitute this into Equation \ref{eq:sigma_MME}, obtaining:
 
 \begin{equation}
     \hat{\sigma_\epsilon^2}_{MME} = \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 \hat{\beta}_{MME}^2 \sigma_u^2
@@ -162,15 +163,16 @@ Thus, if $\sigma^2_u$ is known, and we use $var(x)$ as an estimator for $\sigma^
 
 The computer simulation method was employed in order to investigate the impacts of non-normal errors on the OLS and MME estimates.
 
-For all simulations, we use a common $\beta_{truth}$, $n$, $x_{lo}$, $x{hi}$. $\beta_{truth}$ is the underlying ground truth $\beta$ of the model $y=\beta x + \epsilon$. $n$ is the number of observations used in each simulation trial. $x_{lo}$ and $x_{hi}$ are the lower bound and upper bound of the $x$ being sampled respectively.
+For all simulations, we use a common $\beta_{truth}$, $n$, $x_{lo}$, $x_{hi}$. $\beta_{truth}$ is the underlying ground truth $\beta$ of the model $y=\beta x + \epsilon$. $n$ is the number of observations used in each simulation trial. $x_{lo}$ and $x_{hi}$ are the lower bound and upper bound of the $x$ being sampled respectively.
 
 In order to produce comparable results when using different error distributions, for each experiment, we first fix a certain $\sigma^2_u$ and $\sigma^2_\epsilon$.
 Afterwards, for the observation error $u$, we choose a distribution where the observation errors $u_i$ are sampled from.
-The model parameters of this distribution is chosen such that it has variance equal to $\sigma_u^2$.
+The parameters of this distribution are chosen such that it has variance equal to $\sigma_u^2$.
 Similarly, for the residual error $\epsilon$, we choose a distribution where the residual errors $\epsilon_i$ are sampled from.
-The model parameters of this distribution is chosen such that it has variance equal to $\sigma_\epsilon^2$.
+The parameters of this distribution are chosen such that it has variance equal to $\sigma_\epsilon^2$.
 
-After determining which distributions to use, we perform the observation data generation step. First, we draw independently $n$ instances of explanatory variable $x_i$ from the uniform distribution defined by the bounds $x_{lo}$ and $x_{hi}$, $U(x_{lo}, x_{hi})$.
+After determining which distributions to use, we perform the observation data generation step.
+First, we pick $n$ instances of explanatory variable $x_i$ uniformly from the interval $[x_{lo}, x_{hi}]$.
 Afterwards, for each of the instances $x_i$, we compute $y_i = \beta_{truth} \cdot x_i + \epsilon_i$, where $\epsilon_i$ is drawn independently from the distribution for residual errors determined for this simulation trial.
 For each $x_i$, we also compute the observed explanatory variable $\tilde{x_i} = x_i + u_i$, where observation error $u_i$ is added for each $x_i$. $u_i$ is drawn independently from the distribution for observation errors determined for this simulation trial.
 
@@ -188,7 +190,7 @@ After generating the observation data, we perform estimations based on the obser
 After computing the estimators, we compute the bias and squared error of each of these estimators when compared to the ground truth $\beta_{truth}$ and $\sigma^2_\epsilon$. 
 
 For the same observation error distribution and residual error distribution, we perform the whole observation data generation and estimation procedures for multiple iterations.
-This is to obtain more reliable conclusions on the mean bias (MBE) and mean squared error (MSE) of the estimators.
+This is to obtain more reliable conclusions on the mean bias error (MBE) and mean squared error (MSE) of the estimators.
 
 \begin{algorithm}[ht]
     \SetAlgoLined
@@ -217,19 +219,19 @@ The computer simulation procedures are summarized in procedure \ref{alg:Algo}.
 
 In order to investigate the impacts on non-normality on the estimators, there is a need to use non-normal distributions to sample the observation error $u$ and residual error $\epsilon$.
 In order to satisfy the assumptions of the errors-in-variables model, the distributions used to generate the error terms should have mean zero.
-In our experiment procedures, we also have to derive the model parameters from a fixed $\sigma_u^2$ and $\sigma_\epsilon^2$.
+Furthermore, in our experiment procedures, we also have to derive the model parameters from a fixed $\sigma_u^2$ and $\sigma_\epsilon^2$.
 Thus, in order to ease calculation, the distribution chosen should have finite variance and the variance is in a closed form such that the derivation of model parameters from a fixed variance is easy to compute.
 
 Taking the above factors into consideration, we decided to use the following distributions: The normal/Gaussian distribution, the Student's $t$ distribution, and the $\chi^2$ distribution re-centered at mean $0$.
-They are chosen because they demonstrate features not seen in the normal distribution - the Student's $t$ distribution is known to have heavier tails than the normal distribution, and the $\chi^2$ distribution is known to be skewed.
-They pose substantial differences from the normal distribution which has light tails and is symmetric at $0$.
+They are chosen because they demonstrate features not seen in the normal distribution - the Student's $t$ distribution has heavier tails than the normal distribution, and the $\chi^2$ distribution is skewed.
+They pose substantial differences from the normal distribution, which has light tails and is symmetric at $0$.
 
 We will then perform the simulations using these distributions as the underlying sampling distributions of the observation error $u$ and residual error $\epsilon$, as described in the previous subsection.
 
 \subsection{Experiment parameters used}
 
 To produce the results in the subsequent section, we used the following parameters: $n=30$, $\beta_{truth}=2$, $x_{lo} = -20$, $x_{hi} = 20$.
-For the simulation procedures, we used $\sigma^2_u \in {0, 1.5, 2, 2.5, 3.0, 4.5, 6.0, 8.0, 10.0}$, and $\sigma_\epsilon^2 \in {1.5, 2, 2.5}$.
+For the simulation procedures, we used $\sigma^2_u \in \{0, 1.5, 2, 2.5, 3.0, 4.5, 6.0, 8.0, 10.0\}$, and $\sigma_\epsilon^2 \in \{1.5, 2, 2.5\}$.
 We are unable to experiment with variances from $(0, 1]$ because the variance of the Student's $t$ distribution is only defined when $\sigma^2 > 1$.
 
 For each combination of observation error distribution and residual error distribution, we performed $10,000$ iterations to produce the MBE and MSE results.
@@ -281,7 +283,7 @@ Under the absence of observation error, the OLS and MME estimators of $\beta$ ar
     \end{tabular}
 \end{table}
 
-Table \ref{Tab:MBE_absence} summarizes the MBE of $\beta$ when $\sigma^2_u=0$ for different error distributions.
+Table \ref{Tab:MBE_absence} summarizes the MBE of $\beta$ when $\sigma^2_u=0$ for different error distributions for $\epsilon$.
 There is no clear trend of increasing/decreasing pattern of the MBE for each of the distributions. 
 This is mostly because the bias is centered at zero, leading to the signs of bias to be different between simulation trials, which cancel out each other in the calculation of MBE. 
 
@@ -307,7 +309,7 @@ Furthermore, we can observe that the MSE for $\chi^2$ distribution is the least 
 \subsubsection{Normal-distributed observation error and normal-distributed residual error}
 
 Under the presence of observation error, the OLS and MME estimators of $\beta$ are different.
-We would expect the MME estimator to have lower absolute bias and lower MSE because under the presence of observation error, the OLS estimator is inconsistent but the MME estimator is consistent.
+We would expect the MME estimator to have lower absolute bias and lower MSE because under the presence of observation error, the MME estimator is consistent but the OLS estimator is inconsistent.
 
 Table \ref{Tab:MBE_normal} and Table \ref{Tab:MSE_normal} summarize the simulated MBE and MSE of the estimation of $\beta$ respectively, under normal-distributed errors.
 
@@ -356,7 +358,6 @@ Table \ref{Tab:MBE_normal} and Table \ref{Tab:MSE_normal} summarize the simulate
 \end{table}
 
 We first focus on the observations of the MBE and MSE of $\hat{\beta}_{OLS}$.
-
 Firstly, we observe that the MBE of $\hat{\beta}_{OLS}$ is negative.
 This is result is expected because $\textrm{plim } \hat{\beta}_{OLS} = \frac{\beta \sigma^2_x}{\sigma^2_x + \sigma^2_u} = \lambda \cdot \beta_{truth}$ and is biased towards zero.
 In this simulation, $\beta_{truth} = 2 > 0$.
@@ -367,7 +368,6 @@ When $\sigma^2_u$ increases, $\lambda$ decreases, and the bias $(\lambda-1) \cdo
 Third, we observe that the MSE of $\hat{\beta}_{OLS}$ increases as $\sigma^2_u$ increases. Intuitively, this means that the error of the estimation of $\beta$ increases as the observation data is dirtier. 
 
 Now, we turn our attention to the observations of the MBE and MSE of $\hat{\beta}_{MME}$, and compare them with $\hat{\beta}_{OLS}$.
-
 Firstly, we observe that the absolute value of MBE and MSE of $\hat{\beta}_{MME}$ are both lower than that of $\hat{\beta}_{OLS}$ at the same $\sigma^2_u$ and $\sigma^2_\epsilon$.
 This is expected because $\hat{\beta}_{MME}$ is a consistent estimator of $\beta$ while $\hat{\beta}_{OLS}$ is not.
 Second, we observe that the MBE of $\hat{\beta}_{MME}$ (roughly) increases as $\sigma^2_u$ increases.
@@ -494,7 +494,7 @@ These differences are tabulated in Tables \ref{Tab:MBE_diff_t_normal} and \ref{T
 
 It should be noted that when the variance of a Student's $t$ distribution is low, the number of degrees of freedom of the distribution is high. 
 From elementary statistical theory we know that as the number of degrees of freedom of a Student's $t$ distribution increases, it converges to the normal distribution.
-Thus, for some low fixed variance, we should expect similar findings from a Student's $t$ distribution and normal distribution with that variance.
+Thus, for some low fixed variance, we should expect similar results from a Student's $t$ distribution and normal distribution with that variance.
 
 We first focus on the comparisons in MBE.
 For $\hat{\beta}_{OLS}$, we observe that the difference is first close to zero, then increases to a certain point (around at $\sigma^2_u = 4.5$), then again starts to decrease.
