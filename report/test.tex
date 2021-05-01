@@ -82,7 +82,7 @@ Suppose we use the ordinary least-squares (OLS) estimator for $\beta$:
     \hat{\beta}_{OLS} = \frac{cov(\tilde{x}, y)}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}
 \end{equation}
 
-Because $\epsilon$, $u$ and $x$ are independent to each other, we can obtain the limit of $\hat{beta}_{OLS}$
+Because $\epsilon$, $u$ and $x$ are independent to each other, we can obtain the limit of $\hat{\beta}_{OLS}$
 
 \begin{equation}
     \textrm{plim } \hat{\beta}_{OLS} = \frac{\beta \sigma^2_x}{\sigma^2_x + \sigma^2_u} = \lambda \beta
@@ -183,7 +183,7 @@ After generating the observation data, we perform estimations based on the obser
         \hat{\beta}_{OLS} &= \frac{cov(\tilde{x, y})}{var(\tilde{x})} = \frac{cov(x+u, \beta x + \epsilon)}{var(x + u)}\\
         \hat{\beta}_{MME} &= \frac{var(\tilde{x})}{var(\tilde{x}) - \sigma^2_u}\\
         \hat{\sigma^2_\epsilon}_{OLS} &= var\left(y - \hat{\beta}_{OLS} \tilde{x}\right)\\
-        \hat{\sigma^2_\epsilon}_{MME} &= \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 \hat{\beta}_{MME}^2\\
+        \hat{\sigma^2_\epsilon}_{MME} &= \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 \hat{\beta}_{MME}^2 \sigma^2_u\\
     \end{split}
 \end{equation}
 
@@ -201,7 +201,7 @@ This is to obtain more reliable conclusions on the mean bias error (MBE) and mea
             Initialize $MSE_{{\hat{\sigma^2_\epsilon}}_{OLS}}=0$, $MSE_{{\hat{\sigma^2_\epsilon}}_{MME}}=0$, $MBE_{\hat{\sigma^2_\epsilon}_{OLS}}=0$, $MBE_{\hat{\sigma^2_\epsilon}_{MME}}=0$\;
 
             \For{10000 iterations}{
-                Draw independently $n$ instances of explanatory variable $x_i$ from $U(x_{lo}, x_{hi})$\;
+                Pick $n$ instances of explanatory variable $x_i$ uniformly from the interval $[x_{lo}, x_{hi}]$\;
                 Compute $n$ observations of $y_i = \beta_{truth} \cdot x_i + \epsilon_i$, where $\epsilon_i$ is drawn independently from a distribution with variance $\sigma^2_\epsilon$\;
                 Compute $n$ instances of observed explanatory variable $\tilde{x}_i = x_i + u_i$, where observation $u_i$ is drawn independently from a distribution with variance $\sigma^2_u$\;
                 Calculate $\hat{\beta}_{OLS}$, $\hat{\beta}_{MME}$, $\hat{\sigma^2_\epsilon}_{OLS}$, $\hat{\sigma^2_\epsilon}_{MSE}$ from the observations $\tilde{x}$, $y$, and prior information on observation error $\sigma^2_u$\;
@@ -632,7 +632,7 @@ We use the following estimators of $\sigma^2_\epsilon$ and apply them to the gen
 \begin{equation}
     \begin{split}
         \hat{\sigma^2_\epsilon}_{OLS} &= var\left(y - \hat{\beta}_{OLS} \tilde{x}\right)\\
-        \hat{\sigma^2_\epsilon}_{MME} &= \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 \hat{\beta}_{MME}^2\\
+        \hat{\sigma^2_\epsilon}_{MME} &= \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 \hat{\beta}_{MME}^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 \hat{\beta}_{MME}^2 \sigma^2_u\\
     \end{split}
 \end{equation}
 
