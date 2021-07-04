@@ -193,9 +193,9 @@ After generating the observation data, we perform estimations based on the obser
 
 \begin{equation}
     \begin{split}
-        \hat{\beta}_{OLS} &= \frac{cov(\tilde{x, y})}{var(\tilde{x})}\\
+        \hat{\beta}_{OLS} &= \frac{cov(\tilde{x}, y)}{var(\tilde{x})}\\
         \hat{\beta}_{MME} &= \frac{var(\tilde{x})}{var(\tilde{x}) - \sigma^2_u}\\
-        \hat{\sigma^2_\epsilon}_{OLS} &= \frac{\sum \hat{\epsilon}}{n-1}\\
+        \hat{\sigma^2_\epsilon}_{OLS} &= \frac{\sum \hat{\epsilon}^2}{n-1}\\
         \hat{\sigma_\epsilon^2}_{MME} &= \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 (\hat{\beta}_{MME})^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 (\hat{\beta}_{MME})^2 \sigma_u^2\\
     \end{split}
 \end{equation}
@@ -273,7 +273,7 @@ We use the following estimators of $\beta$ and apply them to the generated obser
 
 \begin{equation}
     \begin{split}
-        \hat{\beta}_{OLS} &= \frac{cov(\tilde{x, y})}{var(\tilde{x})}\\
+        \hat{\beta}_{OLS} &= \frac{cov(\tilde{x}, y)}{var(\tilde{x})}\\
         \hat{\beta}_{MME} &= \frac{var(\tilde{x})}{var(\tilde{x}) - \sigma^2_u}\\
     \end{split}
 \end{equation}
@@ -649,7 +649,7 @@ We use the following estimators of $\sigma^2_\epsilon$ and apply them to the gen
 
 \begin{equation}
     \begin{split}
-        \hat{\sigma^2_\epsilon}_{OLS} &= \frac{\sum \hat{\epsilon}}{n-1}\\
+        \hat{\sigma^2_\epsilon}_{OLS} &= \frac{\sum \hat{\epsilon}^2}{n-1}\\
         \hat{\sigma_\epsilon^2}_{MME} &= \hat{\sigma^2_\epsilon}_{OLS} -  (1-\lambda)^2 (\hat{\beta}_{MME})^2 (var(\tilde{x}) - \sigma^2_u) - \lambda^2 (\hat{\beta}_{MME})^2 \sigma_u^2\\
     \end{split}
 \end{equation}
